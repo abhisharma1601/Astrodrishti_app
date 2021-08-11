@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1049927656681",
+    "project_id": "astrodrishti2",
+    "storage_bucket": "astrodrishti2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049927656681:android:bdb3729836d27e0bb4bc78",
+        "android_client_info": {
+          "package_name": "in.astrodrishti.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049927656681-53l545sne5vs60kmpnimbr9s3bujemd2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.astrodrishti.app",
+            "certificate_hash": "c2ee0379eea13710c7443a3bd42b89f47f44e283"
+          }
+        },
+        {
+          "client_id": "1049927656681-urjpktbh5af51e8qsbddq405na2s3qs2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLou45UgvvpFt_4MZEup79ctgL2Ki6I-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049927656681-urjpktbh5af51e8qsbddq405na2s3qs2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
