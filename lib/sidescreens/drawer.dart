@@ -162,28 +162,28 @@ class _drawerState extends State<drawer> {
                         MaterialPageRoute(
                             builder: (context) => sv_kundli(
                                   email: email,
-                                  lenn: (lennn.data() as dynamic)['count'],
+                                 
                                 )));
                   } else {
                     //print("get");
-                    FirebaseFirestore.instance
-                        .collection("Users")
-                        .doc("emails")
-                        .collection(email)
-                        .doc("AAAAAA")
-                        .set({"count": 1});
-                    var lennn = await FirebaseFirestore.instance
-                        .collection("Users")
-                        .doc("emails")
-                        .collection(email)
-                        .doc("AAAAAA")
-                        .get();
+                    // FirebaseFirestore.instance
+                    //     .collection("Users")
+                    //     .doc("emails")
+                    //     .collection(email)
+                    //     .doc("AAAAAA")
+                    //     .set({"count": 1});
+                    // var lennn = await FirebaseFirestore.instance
+                    //     .collection("Users")
+                    //     .doc("emails")
+                    //     .collection(email)
+                    //     .doc("AAAAAA")
+                    //     .get();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => sv_kundli(
                                   email: email,
-                                  lenn: (lennn.data() as dynamic)['count'],
+                                  
                                 )));
                   }
                   setState(() {

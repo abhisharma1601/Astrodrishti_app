@@ -1,5 +1,7 @@
 import 'package:astrodrishti_app/brain/brain.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:astrodrishti_app/main.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +43,15 @@ class _kundli_pageState extends State<kundli_page> {
   @override
   void initState() {
     super.initState();
-    print(widget.degreeslist);
+   
     for (Map i in widget.degreeslist) {
-     
-      degbox.add(Deg_Box(name: i.keys.toString().replaceAll("(", "").replaceAll(")", ""), val: i.values.toString().replaceAll("(", "").replaceAll(")", "").substring(0,5)));
+      degbox.add(Deg_Box(
+          name: i.keys.toString().replaceAll("(", "").replaceAll(")", ""),
+          val: i.values
+              .toString()
+              .replaceAll("(", "")
+              .replaceAll(")", "")
+              .substring(0, 5)));
     }
     setState(() {});
   }
@@ -52,124 +59,130 @@ class _kundli_pageState extends State<kundli_page> {
   Widget build(BuildContext context) {
     List<Widget> widsofswiper = [
       Container(
-        height: 325,
-        width: 300,
-        margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
-        decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("images/kundli11.jpg")),
-            border: Border.all(color: Colors.white)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                chotabox(
-                    planet: " " +
-                        "(" +
-                        (widget.planets[16]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[2]),
-                chotabox(
-                    planet: " " +
-                        "(" +
-                        (widget.planets[26]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[12]),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                chotabox(
-                    planet: "  " +
-                        "(" +
-                        (widget.planets[17]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[3]),
-                chotabox(planet: widget.planets[1].toString()),
-                chotabox(
-                    planet: " " +
-                        "(" +
-                        (widget.planets[25]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[11].toString()),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                chotabox(
-                    planet: "  " +
-                        "(" +
-                        (widget.planets[18]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[4].toString()),
-                chotabox(
-                    planet: "  " +
-                        "(" +
-                        (widget.planets[24]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[10].toString()),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                chotabox(
-                    planet: "" +
-                        "(" +
-                        (widget.planets[19]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[5].toString()),
-                chotabox(
-                    planet: "  " +
-                        "(" +
-                        (widget.planets[21]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[7].toString()),
-                chotabox(
-                    planet: "  " +
-                        "(" +
-                        (widget.planets[23]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[9].toString())
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                chotabox(
-                    planet: "        " +
-                        "(" +
-                        (widget.planets[20]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[6]),
-                chotabox(
-                    planet: "        " +
-                        "(" +
-                        (widget.planets[22]).toString() +
-                        ")" +
-                        "\n" +
-                        widget.planets[8]),
-              ],
-            ),
-          ],
-        ),
-      ),
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(color: Colors.white),
+          child: SvgPicture.string(hemlo))
+      // Container(
+      //   height: 325,
+      //   width: 300,
+      //   margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
+      //   decoration: BoxDecoration(
+      //       image: DecorationImage(image: AssetImage("images/kundli11.jpg")),
+      //       border: Border.all(color: Colors.white)),
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget>[
+      //       Row(
+      //         children: <Widget>[
+      //           chotabox(
+      //               planet: " " +
+      //                   "(" +
+      //                   (widget.planets[16]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[2]),
+      //           chotabox(
+      //               planet: " " +
+      //                   "(" +
+      //                   (widget.planets[26]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[12]),
+      //         ],
+      //       ),
+      //       Row(
+      //         children: <Widget>[
+      //           chotabox(
+      //               planet: "  " +
+      //                   "(" +
+      //                   (widget.planets[17]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[3]),
+      //           chotabox(planet: widget.planets[1].toString()),
+      //           chotabox(
+      //               planet: " " +
+      //                   "(" +
+      //                   (widget.planets[25]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[11].toString()),
+      //         ],
+      //       ),
+      //       Row(
+      //         children: <Widget>[
+      //           chotabox(
+      //               planet: "  " +
+      //                   "(" +
+      //                   (widget.planets[18]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[4].toString()),
+      //           chotabox(
+      //               planet: "  " +
+      //                   "(" +
+      //                   (widget.planets[24]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[10].toString()),
+      //         ],
+      //       ),
+      //       Row(
+      //         children: <Widget>[
+      //           chotabox(
+      //               planet: "" +
+      //                   "(" +
+      //                   (widget.planets[19]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[5].toString()),
+      //           chotabox(
+      //               planet: "  " +
+      //                   "(" +
+      //                   (widget.planets[21]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[7].toString()),
+      //           chotabox(
+      //               planet: "  " +
+      //                   "(" +
+      //                   (widget.planets[23]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[9].toString())
+      //         ],
+      //       ),
+      //       Row(
+      //         children: <Widget>[
+      //           chotabox(
+      //               planet: "        " +
+      //                   "(" +
+      //                   (widget.planets[20]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[6]),
+      //           chotabox(
+      //               planet: "        " +
+      //                   "(" +
+      //                   (widget.planets[22]).toString() +
+      //                   ")" +
+      //                   "\n" +
+      //                   widget.planets[8]),
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      ,
       Container(
         margin: EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
         padding: EdgeInsets.all(5),
-        // height: 370,
+        //height: 390,
         decoration: BoxDecoration(
             color: Colors.transparent,
-            // border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(10)),
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(0)),
         child: SingleChildScrollView(
           child: Column(
             children: degbox,
@@ -197,7 +210,7 @@ class _kundli_pageState extends State<kundli_page> {
           child: Column(
             children: <Widget>[
               Container(
-                height: 325,
+                height: 450,
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return widsofswiper[index];
@@ -214,37 +227,37 @@ class _kundli_pageState extends State<kundli_page> {
                   color: Colors.white,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(22, 0, 0, 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          "Data".tr(),
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      widget.name,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    Text(
-                      widget.dob,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    Text(
-                      widget.place,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.fromLTRB(22, 0, 0, 5),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.stretch,
+              //     children: <Widget>[
+              //       Row(
+              //         children: <Widget>[
+              //           Text(
+              //             "Data".tr(),
+              //             style: TextStyle(
+              //                 fontSize: 40,
+              //                 fontWeight: FontWeight.bold,
+              //                 color: Colors.white),
+              //           ),
+              //         ],
+              //       ),
+              //       Text(
+              //         widget.name,
+              //         style: TextStyle(fontSize: 20, color: Colors.white),
+              //       ),
+              //       Text(
+              //         widget.dob,
+              //         style: TextStyle(fontSize: 20, color: Colors.white),
+              //       ),
+              //       Text(
+              //         widget.place,
+              //         style: TextStyle(fontSize: 20, color: Colors.white),
+              //       )
+              //     ],
+              //   ),
+              // ),
               GestureDetector(
                 onTap: () async {
                   setState(() {
@@ -286,7 +299,6 @@ class _kundli_pageState extends State<kundli_page> {
                         lon: widget.lon,
                         name: widget.name,
                         dob: widget.dob,
-                        bp: widget.place,
                         bt: widget.time,
                       ),
                     ),
@@ -354,7 +366,7 @@ class _kundli_pageState extends State<kundli_page> {
                                 "lon": widget.lon,
                                 "timezone": widget.timezone,
                                 "planets": widget.planets,
-                                 "deglist": widget.degreeslist
+                                "deglist": widget.degreeslist
                               });
                               await FirebaseFirestore.instance
                                   .collection("Users")

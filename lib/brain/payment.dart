@@ -19,8 +19,8 @@ class py_pg extends StatefulWidget {
       required this.name,
       required this.dob,
       required this.bt,
-      required this.bp});
-  String type, lat, lon, name, dob, bp, bt, que;
+      });
+  String type, lat, lon, name, dob, bt, que;
   int pricee;
 
   @override
@@ -50,7 +50,7 @@ class _py_pgState extends State<py_pg> {
       "Name": widget.name,
       "DOB": widget.dob,
       "Birthtime": widget.bt,
-      "birthstate": widget.bp,
+      
       "Lat": widget.lat,
       "Lon": widget.lon,
       "Order ID": orderid,

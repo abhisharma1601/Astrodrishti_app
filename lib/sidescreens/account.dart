@@ -127,7 +127,6 @@ class acc_page extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => sv_kundli(
                                     email: email,
-                                    lenn: (lennn.data() as dynamic)['count'],
                                   )));
                     } else {
                       //print("get");
@@ -148,7 +147,6 @@ class acc_page extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => sv_kundli(
                                     email: email,
-                                    lenn: (lennn.data() as dynamic)['count'],
                                   )));
                     }
                   },

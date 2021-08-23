@@ -1,13 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:astrodrishti_app/main.dart';
+import 'package:astrodrishti_app/screens/KundliMenu.dart';
 import 'package:astrodrishti_app/screens/kundlipage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:easy_localization/easy_localization.dart';
+import 'package:xml/xml.dart';
 
 class api {
   api({
@@ -28,13 +32,20 @@ class api {
     try {
       Uri url = await Uri.parse(
           "https://api.vedicastroapi.com/json/horoscope/vedic?dob=$date&tob=$time&lat=$lat&lon=$long&tz=$timezone&api_key=$keyy");
-      // Uri urlimg = await Uri.parse(
-      //     "https://api.vedicastroapi.com/json/horoscope/chartimage?dob=$date&tob=$time&lat=$lat&lon=$long&tz=$timezone&div=D1&api_key=$keyy");
-      // http.Response resimg = await http.get(urlimg);
+      Uri urlimg = await Uri.parse(
+          "https://api.vedicastroapi.com/json/horoscope/chartimage?dob=$date&tob=$time&lat=$lat&lon=$long&tz=$timezone&div=D1&style=north&color=black&api_key=$keyy");
+      http.Response resimg = await http.get(urlimg);
       http.Response res = await http.get(url);
-      // print(resimg.statusCode);
+      print("gogo");
+      //print(resimg.body);
+      print(XmlDocument.parse(resimg.body).findAllElements("svg"));
+     
+      // .findAllElements("svg")
+      // .toString()
+      // .replaceAll("(", "")
+      // .replaceAll(")", "");
       String data = res.body;
-      print(jsonDecode(data)["response"]);
+      // print(jsonDecode(data)["response"]);
       List palnets = ["", "", "", "", "", "", "", "", "", "", "", "", "", ""];
       List houseno = ["", "", "", "", "", "", "", "", "", "", "", "", ""];
       List deglist = [];
@@ -238,25 +249,24 @@ class Pre_box extends StatelessWidget {
 }
 
 class svbox extends StatelessWidget {
-  svbox(
-      {required this.data,
-      required this.dob,
-      required this.email,
-      required this.planets,
-      required this.time,
-      required this.lat,
-      required this.lon,
-      required this.deglist,
-      required this.tmz,
-      required this.plc});
+  svbox({
+    required this.data,
+    required this.dob,
+    required this.email,
+    required this.planets,
+    required this.time,
+    required this.lat,
+    required this.lon,
+    required this.tmz,
+    required this.name,
+  });
   String data = "No data Saved";
   String dob = "No data saved";
-  List planets, deglist;
+  List planets;
   String time;
   String lat, lon;
   String tmz;
-  String email;
-  String plc;
+  String email, name;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -264,17 +274,14 @@ class svbox extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => kundli_page(
-                      degreeslist: deglist,
-                      planets: planets,
-                      dob: dob,
-                      time: time,
-                      timezone: tmz,
-                      lat: lat,
-                      lon: lon,
-                      name: data,
-                      place: plc,
-                    )));
+                builder: (context) => KundliMenu(
+                    planets: planets,
+                    name: name,
+                    dob: dob,
+                    time: time,
+                    timezone: tmz,
+                    lat: lat,
+                    lon: lon)));
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(15, 10, 15, 5),
@@ -311,12 +318,6 @@ class svbox extends StatelessWidget {
                         .collection(email)
                         .doc(data)
                         .delete();
-                    await FirebaseFirestore.instance
-                        .collection("Users")
-                        .doc("emails")
-                        .collection(email)
-                        .doc("AAAAAA")
-                        .update({"count": FieldValue.increment(-1)});
                   },
                   child: Icon(
                     Icons.delete,
@@ -337,6 +338,8 @@ String keyy = null as String;
 int reportprice = null as int, answerprice = null as int;
 String keyrz = null as String;
 String gkey = null as String;
+List<Widget> charts = [];
+bool savevis = true;
 
 gogg() async {
   var api_key_main = await FirebaseFirestore.instance

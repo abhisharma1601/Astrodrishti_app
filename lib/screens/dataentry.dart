@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:astrodrishti_app/brain/location_picker.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:astrodrishti_app/main.dart';
+import 'package:astrodrishti_app/screens/KundliMenu.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -198,7 +199,7 @@ class _data_entryState extends State<data_entry> {
                 await getLocationWithNominatim();
                 http.Response res = await http.get(Uri.parse(
                     "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"));
-                print(res.body);
+                
                 http.Response ress = await http.get(Uri.parse(
                     "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"));
                 setState(() {
@@ -297,20 +298,32 @@ class _data_entryState extends State<data_entry> {
                     timezone: tmz,
                   );
                   var data = await kdap.apiwrk();
-                  print(data);
+                  
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => kundli_page(
-                              planets: data[0],
-                              place: loca,
+                          builder: (context) => KundliMenu(
+                              planets: data[0],                              
                               time: timei,
                               name: nameController.text,
                               timezone: tmz,
                               lat: lat,
-                              lon: lon,
-                              degreeslist: data[1],
+                              lon: lon,                              
                               dob: datei)));
+
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => kundli_page(
+                  //             planets: data[0],
+                  //             place: loca,
+                  //             time: timei,
+                  //             name: nameController.text,
+                  //             timezone: tmz,
+                  //             lat: lat,
+                  //             lon: lon,
+                  //             degreeslist: data[1],
+                  //             dob: datei)));
                   setState(() {
                     spin = false;
                   });

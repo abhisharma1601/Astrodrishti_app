@@ -11,7 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 String version = "0.4";
 
-
+String hemlo = "";
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();

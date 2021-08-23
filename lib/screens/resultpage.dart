@@ -15,7 +15,6 @@ class result_page extends StatefulWidget {
     required this.perso,
     required this.name,
     required this.dob,
-    required this.bp,
     required this.bt,
     required this.sun,
     required this.moon,
@@ -39,7 +38,7 @@ class result_page extends StatefulWidget {
       areport,
       lagan;
   String lat, lon;
-  String name, dob, bp, bt;
+  String name, dob, bt;
 
   @override
   _result_pageState createState() => _result_pageState();
@@ -80,7 +79,6 @@ class _result_pageState extends State<result_page> {
                         lon: widget.lon,
                         name: widget.name,
                         dob: widget.dob,
-                        bp: widget.bp,
                         bt: widget.bt,
                         que: "No Question Only Report !",
                       )));
@@ -115,16 +113,16 @@ class _result_pageState extends State<result_page> {
           ),
         ),
       ),
-      appBar: AppBar(
-        backgroundColor: Colors.amberAccent[700],
-        title: Text(
-          "Birth Report 卐".tr(),
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 28,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.amberAccent[700],
+      //   title: Text(
+      //     "Birth Report 卐".tr(),
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //       fontSize: 28,
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

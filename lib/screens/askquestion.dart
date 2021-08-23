@@ -81,7 +81,7 @@ class _AskQuestionState extends State<AskQuestion> {
                           dob: datei,
                           bt: timei,
                           type: "Question",
-                          bp: loca,
+                         
                           name: currentuser.passname(),
                           pricee: answerprice,
                         )));
