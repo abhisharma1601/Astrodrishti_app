@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:astrodrishti_app/brain/brain.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:astrodrishti_app/screens/basicdetails.dart';
 import 'package:astrodrishti_app/screens/kundli_charts.dart';
 import 'package:astrodrishti_app/screens/resultpage.dart';
 import 'package:astrodrishti_app/startpage.dart';
@@ -13,21 +16,21 @@ import 'package:xml/xml.dart';
 import 'package:http/http.dart' as http;
 
 class KundliMenu extends StatefulWidget {
-  KundliMenu({
-    required this.planets,
-    required this.name,
-    required this.dob,
-    required this.time,
-    required this.timezone,
-    required this.lat,
-    required this.lon,
-  });
+  KundliMenu(
+      {required this.planets,
+      required this.name,
+      required this.dob,
+      required this.time,
+      required this.timezone,
+      required this.lat,
+      required this.lon,
+      required this.place});
   List planets;
   String name;
   String dob;
   String time;
   String timezone;
-  String lat, lon;
+  String lat, lon, place;
 
   @override
   _KundliMenuState createState() => _KundliMenuState();
@@ -54,8 +57,83 @@ class _KundliMenuState extends State<KundliMenu> {
         lon: widget.lon,
         time: widget.time,
         tmz: widget.timezone);
+    getbasic();
     getdata();
     super.initState();
+  }
+
+  getbasic() async {
+    List<Widget> tablelistlocal = [];
+    tablelistlocal.add(
+      New_Tables(heading: "Basic Details", tablelist: [
+        TableRow(
+          children: [table_text(text: "Name"), table_text(text: widget.name)],
+        ),
+        TableRow(
+          children: [
+            table_text(text: "DOB"),
+            table_text(text: widget.dob.toString())
+          ],
+        ),
+        TableRow(
+          children: [
+            table_text(text: "Birth Time"),
+            table_text(text: widget.time.toString())
+          ],
+        ),
+        TableRow(
+          children: [
+            table_text(text: "Birth Place"),
+            table_text(text: widget.place.toString())
+          ],
+        ),
+      ]),
+    );
+    http.Response res = await http.get(Uri.parse(
+        "https://api.vedicastroapi.com/json/panchang/getpanchang?date=${widget.dob}&time=${widget.time}&tz=${widget.timezone}&api_key=$keyy"));
+    String data = res.body;
+    var datadecode = jsonDecode(data)["response"];
+    tablelistlocal.add(
+      New_Tables(
+        heading: "Kundli Details",
+        tablelist: [
+          TableRow(children: [
+            table_text(text: "Day"),
+            table_text(text: datadecode["day"]["name"])
+          ]),
+          TableRow(children: [
+            table_text(text: "Tithi"),
+            table_text(text: datadecode["tithi"]["name"])
+          ]),
+          TableRow(children: [
+            table_text(text: "Nakshatra"),
+            table_text(text: datadecode["nakshatra"]["name"])
+          ]),
+          TableRow(children: [
+            table_text(text: "Karna"),
+            table_text(text: datadecode["karna"]["name"])
+          ]),
+          TableRow(children: [
+            table_text(text: "Yoga"),
+            table_text(text: datadecode["yoga"]["name"])
+          ]),
+          TableRow(children: [
+            table_text(text: "Rashi"),
+            table_text(text: datadecode["rasi"]["name"])
+          ]),
+        ],
+      ),
+    );
+    widlist[0] = Basicdetails(tablelist: tablelistlocal);
+    widlist[2] = Basicdetails(tablelist: [
+      New_Tables(tablelist: [TableRow(
+        children: [
+          table_text(text: "Sun"),
+          table_text(text: "2.0.48")
+        ]
+      )], heading: "Planet Degree")
+    ]);
+    setState(() {});
   }
 
   getdata() async {

@@ -281,6 +281,7 @@ class svbox extends StatelessWidget {
                     time: time,
                     timezone: tmz,
                     lat: lat,
+                    place: "Lat: ${lat.substring(0,5)}, Long: ${lon.substring(0,5)}",
                     lon: lon)));
       },
       child: Container(

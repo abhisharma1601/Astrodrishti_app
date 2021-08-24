@@ -308,7 +308,8 @@ class _data_entryState extends State<data_entry> {
                               name: nameController.text,
                               timezone: tmz,
                               lat: lat,
-                              lon: lon,                              
+                              lon: lon, 
+                              place: loca,                             
                               dob: datei)));
 
                   // Navigator.push(
