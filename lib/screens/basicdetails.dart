@@ -68,7 +68,7 @@ class table_text extends StatelessWidget {
       child: Text(
         text,
         textScaleFactor: 1.5,
-        style: TextStyle(color: Colors.white,fontSize: 13),
+        style: TextStyle(color: Colors.white, fontSize: 13),
       ),
     );
   }
