@@ -2,7 +2,7 @@
     package="com.example.astrodrishti_app">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
-        android:label="astrodrishti_app"
+        android:label="AstroDrishti"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyAHs2rZusPbs1BjngrenWT3NpCqEztRru0"/>

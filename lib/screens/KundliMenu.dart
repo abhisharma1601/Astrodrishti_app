@@ -141,7 +141,7 @@ class _KundliMenuState extends State<KundliMenu> {
         planetsdeg.add(TableRow(children: [
           table_text(
               text: jsonDecode(data)['response'][i.toString()]['full_name']
-                  .toString()),
+                  .toString().tr()),
           table_text(
               text: jsonDecode(data)['response'][i.toString()]['local_degree']
                   .toString()

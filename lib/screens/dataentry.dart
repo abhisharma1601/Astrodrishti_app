@@ -299,7 +299,7 @@ class _data_entryState extends State<data_entry> {
                   );
                   var data = await kdap.apiwrk();
                   
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => KundliMenu(
@@ -312,19 +312,7 @@ class _data_entryState extends State<data_entry> {
                               place: loca,                             
                               dob: datei)));
 
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => kundli_page(
-                  //             planets: data[0],
-                  //             place: loca,
-                  //             time: timei,
-                  //             name: nameController.text,
-                  //             timezone: tmz,
-                  //             lat: lat,
-                  //             lon: lon,
-                  //             degreeslist: data[1],
-                  //             dob: datei)));
+                
                   setState(() {
                     spin = false;
                   });

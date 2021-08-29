@@ -52,18 +52,20 @@ class _start_pageState extends State<start_page> {
         await FirebaseAuth.instance.signInWithCredential(credential);
     User? user = authResult.user;
     try {
-      var lan = await FirebaseFirestore.instance
-          .collection("Users")
-          .doc("emails")
-          .collection(user!.email as String)
-          .doc("AAAAAA")
-          .get();
-      language = (lan.data() as dynamic)["Lan Bool"];
-      if (language) {
-        context.setLocale(Locale("hi", "IN"));
-      } else if (!language) {
-        context.setLocale(Locale("en", "US"));
-      }
+      context.setLocale(Locale("en", "US"));
+      language = false;
+      // var lan = await FirebaseFirestore.instance
+      //     .collection("Users")
+      //     .doc("emails")
+      //     .collection(user!.email as String)
+      //     .doc("AAAAAA")
+      //     .get();
+      // language = (lan.data() as dynamic)["Lan Bool"];
+      // if (language) {
+      //   context.setLocale(Locale("hi", "IN"));
+      // } else if (!language) {
+      //   context.setLocale(Locale("en", "US"));
+      // }
     } catch (e) {
       context.setLocale(Locale("en", "US"));
       language = false;
