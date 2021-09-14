@@ -25,7 +25,7 @@ class _manglikState extends State<manglik> {
   }
 
   Future getLocationWithNominatim() async {
-     var coors = await picloc(context);
+    var coors = await picloc(context);
     try {
       lat = coors[0];
       lon = coors[1];
@@ -177,10 +177,10 @@ class _manglikState extends State<manglik> {
                   spin = true;
                 });
                 await getLocationWithNominatim();
-                http.Response res = await http.get(
-                    Uri.parse("https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"));
-                http.Response ress = await http.get(
-                    Uri.parse("http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"));
+                http.Response res = await http.get(Uri.parse(
+                    "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"));
+                http.Response ress = await http.get(Uri.parse(
+                    "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"));
                 setState(() {
                   if (jsonDecode(res.body)["address"]["city"] == null) {
                     loca = jsonDecode(res.body)["address"]["county"] +
@@ -249,8 +249,8 @@ class _manglikState extends State<manglik> {
                         spin = true;
                       });
                       await gogg();
-                      http.Response ress = await http.get(
-                          Uri.parse("https://api.vedicastroapi.com/json/dosha/mangaldosh?dob=$datei&tob=$timei&lat=$lat&lon=$lon&tz=$tmz&api_key=$keyy"));
+                      http.Response ress = await http.get(Uri.parse(
+                          "https://api.vedicastroapi.com/json/dosha/mangaldosh?dob=$datei&tob=$timei&lat=$lat&lon=$lon&tz=$tmz&api_key=$keyy"));
                       var dshtf =
                           jsonDecode(ress.body)["response"]['is_dosha_present'];
                       var dsh =
@@ -261,91 +261,52 @@ class _manglikState extends State<manglik> {
                         builder: (context) {
                           return Dialog(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
+                                borderRadius: BorderRadius.circular(10)),
                             elevation: 16,
                             child: Container(
-                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(color: Colors.amberAccent.shade700),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 285,
+                              
+                              padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
+                                  Image.asset("images/mars.jpg",
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.17),                                
                                   Center(
-                                    child: Text(
-                                      "Mangal Dosh",
-                                      style: TextStyle(
-                                          color: Colors.amberAccent[700],
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 2, 0, 0),
-                                    child: Text(
-                                      "Dosha Present ?",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 0, 30),
-                                    child: Text(
-                                      dshtf.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(0, 20, 0, 15),
+                                      child: Text(
+                                        "${dshtf.toString().toUpperCase()}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold
+                                        ),
                                       ),
                                     ),
                                   ),
+                                  
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(8, 2, 0, 0),
-                                    child: Text(
-                                      "Prediction",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 0, 30),
+                                        const EdgeInsets.fromLTRB(8, 0, 0, 10),
                                     child: Text(
                                       dsh,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 2, 0, 0),
-                                    child: Text(
-                                      "Score",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 0, 30),
-                                    child: Text(
-                                      score.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
+                                  
+                                 
                                 ],
                               ),
                             ),

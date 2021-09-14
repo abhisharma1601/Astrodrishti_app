@@ -50,9 +50,6 @@ class _data_entryState extends State<data_entry> {
   @override
   bool spin = false;
   TextEditingController nameController = new TextEditingController();
-  // late Map _pickedLocation;
-  // var _pickedLocationText;
-  //var geocoder = new Geocoder("652b38f6bdc04a62a89816aa15506b60");
   String loca = "Delhi, India";
   String lat = "28.70410001";
   String lon = "77.10250001", tmz = '5.5';
@@ -197,11 +194,15 @@ class _data_entryState extends State<data_entry> {
                   spin = true;
                 });
                 await getLocationWithNominatim();
-                http.Response res = await http.get(Uri.parse(
-                    "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"));
-                
-                http.Response ress = await http.get(Uri.parse(
-                    "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"));
+                http.Response res = await http.get(
+                  Uri.parse(
+                      "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"),
+                );
+
+                http.Response ress = await http.get(
+                  Uri.parse(
+                      "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"),
+                );
                 setState(() {
                   if (jsonDecode(res.body)["address"]["city"] == null) {
                     if (jsonDecode(res.body)["address"]["village"] == null) {
@@ -298,21 +299,20 @@ class _data_entryState extends State<data_entry> {
                     timezone: tmz,
                   );
                   var data = await kdap.apiwrk();
-                  
+
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => KundliMenu(
-                              planets: data[0],                              
+                              planets: data[0],
                               time: timei,
                               name: nameController.text,
                               timezone: tmz,
                               lat: lat,
-                              lon: lon, 
-                              place: loca,                             
+                              lon: lon,
+                              place: loca,
                               dob: datei)));
 
-                
                   setState(() {
                     spin = false;
                   });

@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:astrodrishti_app/brain/brain.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
-import 'package:astrodrishti_app/screens/basicdetails.dart';
+import 'package:astrodrishti_app/screens/DashasView.dart';
+import 'package:astrodrishti_app/screens/planetinfo.dart';
 import 'package:astrodrishti_app/screens/kundli_charts.dart';
 
 import 'package:astrodrishti_app/screens/resultpage.dart';
@@ -61,7 +62,21 @@ class _KundliMenuState extends State<KundliMenu> {
     getplanets();
     getbasic();
     getdata();
+    getdashas();
     super.initState();
+  }
+
+  getdashas() async {
+    http.Response resm = await http.get(Uri.parse(
+        "https://api.vedicastroapi.com/json/horoscope/mahadasha?dob=${widget.dob}&tob=${widget.time}&lat=${widget.lat}&lon=${widget.lon}&tz=${widget.timezone}&api_key=$keyy"));
+    String datam = await resm.body;
+
+    http.Response resa = await http.get(Uri.parse(
+        "https://api.vedicastroapi.com/json/horoscope/antardasha?dob=${widget.dob}&tob=${widget.time}&lat=${widget.lat}&lon=${widget.lon}&tz=${widget.timezone}&api_key=$keyy"));
+    String dataa = await resa.body;   
+    setState(() {
+      widlist[3] = DashasView(m: datam, a: dataa);
+    });
   }
 
   getbasic() async {
@@ -141,22 +156,19 @@ class _KundliMenuState extends State<KundliMenu> {
         planetsdeg.add(TableRow(children: [
           table_text(
               text: jsonDecode(data)['response'][i.toString()]['full_name']
-                  .toString().tr()),
+                  .toString()
+                  .tr()),
           table_text(
               text: jsonDecode(data)['response'][i.toString()]['local_degree']
                   .toString()
                   .substring(0, 5))
         ]));
-        // deglist.add({
-        //   jsonDecode(data)['response'][i.toString()]['full_name']:
-        //       jsonDecode(data)['response'][i.toString()]['local_degree']
-        // });
       } on Exception {
         break;
       }
     }
     widlist[2] = Basicdetails(tablelist: [
-      New_Tables(tablelist: planetsdeg, heading: "Planet Degree")
+      New_Tables(tablelist: planetsdeg, heading: "Planet Degree".tr())
     ]);
     setState(() {});
   }

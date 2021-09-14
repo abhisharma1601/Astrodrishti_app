@@ -46,15 +46,6 @@ class _page1State extends State<page1> {
   //   }
   // }
 
-  _launchURL() async {
-    const url = 'https://astrodrishti.online/services.html';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   // void contest() {
   //   showDialog(
   //       context: context,
@@ -88,40 +79,30 @@ class _page1State extends State<page1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AskQuestion()));
-        },
-        child: CircleAvatar(
-          backgroundColor: Colors.amberAccent[700],
-          radius: MediaQuery.of(context).size.width*0.085,
-          child: CircleAvatar(
-            radius:  MediaQuery.of(context).size.width*0.08,
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.chat,
-                    color: Colors.black,
-                  ),
-                  Center(
-                      child: Text(
-                    "Ask Question".tr(),
-                    style: TextStyle(
-                        fontSize: 7,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  )),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+      // floatingActionButton: GestureDetector(
+      //   onTap: () {
+      //     Navigator.push(
+      //         context, MaterialPageRoute(builder: (context) => AskQuestion()));
+      //   },
+      //   child: CircleAvatar(
+      //     backgroundColor: Colors.amberAccent[700],
+      //     radius: MediaQuery.of(context).size.width * 0.08,
+      //     child: CircleAvatar(
+      //       radius: MediaQuery.of(context).size.width * 0.075,
+      //       backgroundColor: Colors.white,
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: Center(
+      //           child: Icon(
+      //             Icons.chat,
+      //             color: Colors.black,
+      //             size: MediaQuery.of(context).size.width * 0.088,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       drawer: Drawer(
         child: drawer(),
       ),
@@ -135,7 +116,7 @@ class _page1State extends State<page1> {
               "AstroDrishti 卐".tr(),
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width*0.070,
+                  fontSize: MediaQuery.of(context).size.width * 0.070,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -148,6 +129,7 @@ class _page1State extends State<page1> {
           progressIndicator: RefreshProgressIndicator(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(height: 5),
               Row(
@@ -167,8 +149,8 @@ class _page1State extends State<page1> {
                         });
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        padding: EdgeInsets.all(5),
+                        //height: MediaQuery.of(context).size.height * 0.27,
+                        padding: EdgeInsets.all(6),
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border:
@@ -203,8 +185,8 @@ class _page1State extends State<page1> {
                         });
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        padding: EdgeInsets.all(5),
+                        //height: MediaQuery.of(context).size.height * 0.27,
+                        padding: EdgeInsets.all(6),
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border:
@@ -236,8 +218,8 @@ class _page1State extends State<page1> {
                         });
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        padding: EdgeInsets.all(5),
+                        //height: MediaQuery.of(context).size.height * 0.27,
+                        padding: EdgeInsets.all(6),
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border:
@@ -265,8 +247,8 @@ class _page1State extends State<page1> {
                         });
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        padding: EdgeInsets.all(5),
+                        //height: MediaQuery.of(context).size.height * 0.27,
+                        padding: EdgeInsets.all(6),
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border:
@@ -298,8 +280,8 @@ class _page1State extends State<page1> {
                         });
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        padding: EdgeInsets.all(5),
+                        //height: MediaQuery.of(context).size.height * 0.27,
+                        padding: EdgeInsets.all(6),
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border:
@@ -327,8 +309,8 @@ class _page1State extends State<page1> {
                         });
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.27,
-                        padding: EdgeInsets.all(5),
+                        //height: MediaQuery.of(context).size.height * 0.27,
+                        padding: EdgeInsets.all(6),
                         margin: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border:
@@ -345,29 +327,30 @@ class _page1State extends State<page1> {
                   ),
                 ],
               ),
-              // GestureDetector(
-              //   onTap: () {
-              //     setState(() {
-              //       spin = true;
-              //     });
-              //     _launchURL();
-              //     setState(() {
-              //       spin = false;
-              //     });
-              //   },
-              //   child: Container(
-              //     height: MediaQuery.of(context).size.height * 0.238,
-              //     padding: EdgeInsets.all(5),
-              //     margin: EdgeInsets.all(5),
-              //     decoration: BoxDecoration(
-              //       border: Border.all(color: Colors.amberAccent.shade700),
-              //       borderRadius: BorderRadius.circular(10),
-              //       image: DecorationImage(
-              //           image: AssetImage("images/store.jpg"),
-              //           fit: BoxFit.cover),
-              //     ),
-              //   ),
-              // ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    spin = true;
+                  });
+                  launch(
+                      "https://4abhi45.github.io/astrodrishtiapp/services.html");
+                  setState(() {
+                    spin = false;
+                  });
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.238,
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.amberAccent.shade700),
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: AssetImage("images/store.jpg"),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -391,18 +374,17 @@ class PageBox extends StatelessWidget {
         Text(
           txt1,
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: MediaQuery.of(context).size.height * 0.03,
-              color: Colors.white),
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
         SizedBox(height: 1),
         Text(
           txt2,
           style: TextStyle(
               fontWeight: FontWeight.normal,
-              fontSize: MediaQuery.of(context).size.height * 0.015,
+              fontSize: 10,
               color: Colors.amberAccent[700]),
         ),
+        SizedBox(height: 2),
       ],
     );
   }

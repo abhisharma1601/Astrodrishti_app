@@ -212,7 +212,7 @@ class _AskQuestionState extends State<AskQuestion> {
                         child: Text(
                           "DOB: " + datei,
                           style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.047,
+                            fontSize: MediaQuery.of(context).size.width * 0.044,
                             color: Colors.white.withOpacity(0.5),
                           ),
                         ),
@@ -237,7 +237,7 @@ class _AskQuestionState extends State<AskQuestion> {
                       child: Text(
                         "Bt".tr() + timei,
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.047,
+                          fontSize: MediaQuery.of(context).size.width * 0.043,
                           color: Colors.white.withOpacity(0.5),
                         ),
                       ),

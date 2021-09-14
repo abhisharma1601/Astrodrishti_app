@@ -1,4 +1,5 @@
 import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:astrodrishti_app/screens/askquestion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,9 @@ class _drawerState extends State<drawer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          DrawerHeader(
+          Container(
+            color: Colors.amberAccent.shade700,
+            padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.032,45,0,0,),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -51,7 +54,7 @@ class _drawerState extends State<drawer> {
                   backgroundImage: AssetImage("images/lg.jpg"),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 3, 0, 10),
                   child: Text(
                     "AstroDrishti 卐".tr(),
                     style: TextStyle(
@@ -61,9 +64,6 @@ class _drawerState extends State<drawer> {
                   ),
                 )
               ],
-            ),
-            decoration: BoxDecoration(
-              color: Colors.amberAccent[700],
             ),
           ),
           Padding(
@@ -95,13 +95,12 @@ class _drawerState extends State<drawer> {
                 onTap: () async {
                   setState(() {
                     _spin = true;
-                  });                            
+                  });
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => orderst(
-                                email: currentuser.passemail()   
-                              )));
+                          builder: (context) =>
+                              orderst(email: currentuser.passemail())));
                   setState(() {
                     _spin = false;
                   });
@@ -162,7 +161,6 @@ class _drawerState extends State<drawer> {
                         MaterialPageRoute(
                             builder: (context) => sv_kundli(
                                   email: email,
-                                 
                                 )));
                   } else {
                     //print("get");
@@ -183,7 +181,6 @@ class _drawerState extends State<drawer> {
                         MaterialPageRoute(
                             builder: (context) => sv_kundli(
                                   email: email,
-                                  
                                 )));
                   }
                   setState(() {
@@ -203,14 +200,15 @@ class _drawerState extends State<drawer> {
                   setState(() {
                     _spin = true;
                   });
-                  _launchURL();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AskQuestion()));
                   setState(() {
                     _spin = false;
                   });
                 },
                 child: Drawer_wig(
-                  icon: Icons.shopping_cart,
-                  text: "Store".tr(),
+                  icon: Icons.question_answer,
+                  text: "Ask Astrologer".tr(),
                 ),
               )),
           Padding(
@@ -286,12 +284,6 @@ class _drawerState extends State<drawer> {
                       } else {
                         context.setLocale(Locale("hi", "IN"));
                       }
-                      FirebaseFirestore.instance
-                          .collection("Users")
-                          .doc("emails")
-                          .collection(currentuser.passemail())
-                          .doc("AAAAAA")
-                          .update({"Lan Bool": val});
                       _spin = false;
                     });
                   },
@@ -299,6 +291,18 @@ class _drawerState extends State<drawer> {
               ],
             ),
           ),
+          Spacer(),
+          Center(
+              child: Text(
+            "By StackX",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.normal,
+                fontSize: 12),
+          )),
+          SizedBox(
+            height: 10,
+          )
         ],
       ),
     );

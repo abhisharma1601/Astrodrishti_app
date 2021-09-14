@@ -76,7 +76,7 @@ class _start_pageState extends State<start_page> {
         pic: user.photoURL as String,
         name: user.displayName as String,
         language: language);
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(
             builder: (context) => page1(
@@ -129,6 +129,7 @@ class _start_pageState extends State<start_page> {
                   ],
                 ),
               ),
+             
             ],
           ),
         ));
