@@ -164,7 +164,7 @@ class _moonState extends State<moon> {
                 "birthdetails".tr(),
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 35,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -261,11 +261,22 @@ class _moonState extends State<moon> {
                                 borderRadius: BorderRadius.circular(10)),
                             elevation: 16,
                             child: Container(
-                              height: 49,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(
+                                      color: Colors.amberAccent.shade700),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 265,
+                              padding: EdgeInsets.all(10),
                               //margin: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: <Widget>[
+                                  Image.asset("images/moon.jpg",
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.27), 
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(0, 10, 0, 10),

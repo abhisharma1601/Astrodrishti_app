@@ -54,12 +54,9 @@ class _start_pageState extends State<start_page> {
     try {
       context.setLocale(Locale("en", "US"));
       language = false;
-      // var lan = await FirebaseFirestore.instance
-      //     .collection("Users")
-      //     .doc("emails")
-      //     .collection(user!.email as String)
-      //     .doc("AAAAAA")
-      //     .get();
+
+      
+    
       // language = (lan.data() as dynamic)["Lan Bool"];
       // if (language) {
       //   context.setLocale(Locale("hi", "IN"));

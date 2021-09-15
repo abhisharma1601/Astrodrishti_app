@@ -49,8 +49,7 @@ class _py_pgState extends State<py_pg> {
         .set({
       "Name": widget.name,
       "DOB": widget.dob,
-      "Birthtime": widget.bt,
-      
+      "Birthtime": widget.bt,      
       "Lat": widget.lat,
       "Lon": widget.lon,
       "Order ID": orderid,
@@ -67,7 +66,7 @@ class _py_pgState extends State<py_pg> {
             head: "Thank You".tr(),
             pyt: "Payment Successfull !".tr(),
             body:
-                "Details for the current kundli will be saved in our Databse for PDF analysis which can take upto 1 day beacuse it is done by astrologer manually for best results. Kundli PDF will be provided On the email through which you have logged in, in the app. Note down Payment ID for any help in future. Order Status Can be seen in current orders."
+                "Details for the current kundli will be saved in our Databse for analysis which can take upto 1 day beacuse it is done by astrologer manually for best results. Report/Answer will be uploaded in 1 day and can be seen thorugh my orders section and will be mailed to the registered E-mail. Thank You"
                     .tr(),
           ),
         ),

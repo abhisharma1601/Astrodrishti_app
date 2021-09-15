@@ -1,5 +1,8 @@
+import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class update_page extends StatefulWidget {
@@ -8,6 +11,23 @@ class update_page extends StatefulWidget {
 }
 
 class _update_pageState extends State<update_page> {
+  String _link = "";
+
+  @override
+  void initState() {
+    getup();
+    super.initState();
+  }
+
+  getup() async {
+    var linkdata = await FirebaseFirestore.instance
+        .collection("AppData")
+        .doc("update")
+        .get();
+    _link = (linkdata.data() as dynamic)["link"];
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,12 +36,15 @@ class _update_pageState extends State<update_page> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-         Image.asset("images/lg.jpg",height: 150,width: 150,),
+          Image.asset(
+            "images/lg.jpg",
+            height: 150,
+            width: 150,
+          ),
           GestureDetector(
             onTap: () async {
-              if (await canLaunch(
-                  "https://astrodrishti.online/astrodrishti.apk")) {
-                launch("https://astrodrishti.online/astrodrishti.apk");
+              if (await canLaunch(_link)) {
+                launch(_link);
               } else {
                 throw 'Could not launch';
               }

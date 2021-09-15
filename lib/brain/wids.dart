@@ -39,7 +39,7 @@ class api {
       print("gogo");
       //print(resimg.body);
       print(XmlDocument.parse(resimg.body).findAllElements("svg"));
-     
+
       // .findAllElements("svg")
       // .toString()
       // .replaceAll("(", "")
@@ -281,7 +281,8 @@ class svbox extends StatelessWidget {
                     time: time,
                     timezone: tmz,
                     lat: lat,
-                    place: "Lat: ${lat.substring(0,5)}, Long: ${lon.substring(0,5)}",
+                    place:
+                        "Lat: ${lat.substring(0, 5)}, Long: ${lon.substring(0, 5)}",
                     lon: lon)));
       },
       child: Container(
@@ -341,17 +342,20 @@ String keyrz = null as String;
 String gkey = null as String;
 List<Widget> charts = [];
 bool savevis = true;
+String link = "";
 
 gogg() async {
   var api_key_main = await FirebaseFirestore.instance
       .collection("AppData")
       .doc("APIKEY")
       .get();
+ 
   keyy = (api_key_main.data() as dynamic)["key"];
   reportprice = (api_key_main.data() as dynamic)["price"];
   answerprice = (api_key_main.data() as dynamic)["question price"];
   keyrz = (api_key_main.data() as dynamic)["keyrz"];
   gkey = (api_key_main.data() as dynamic)["google_key"];
+  
 }
 
 final formdone = () => Fluttertoast.showToast(

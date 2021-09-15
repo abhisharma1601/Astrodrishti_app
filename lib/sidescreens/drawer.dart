@@ -250,47 +250,47 @@ class _drawerState extends State<drawer> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 18),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.language,
-                  size: 25,
-                  color: Colors.amberAccent[700],
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                FlutterSwitch(
-                  width: 70.0,
-                  height: 35.0,
-                  valueFontSize: 10.0,
-                  toggleSize: 25.0,
-                  value: currentuser.passlan(),
-                  borderRadius: 30.0,
-                  padding: 8.0,
-                  showOnOff: true,
-                  inactiveText: "हिंदी",
-                  activeText: "Eng",
-                  activeColor: Colors.black,
-                  inactiveColor: Colors.black,
-                  onToggle: (val) {
-                    setState(() {
-                      _spin = true;
-                      currentuser.language = val;
-                      if (val == false) {
-                        context.setLocale(Locale("en", "US"));
-                      } else {
-                        context.setLocale(Locale("hi", "IN"));
-                      }
-                      _spin = false;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 18),
+          //   child: Row(
+          //     children: [
+          //       Icon(
+          //         Icons.language,
+          //         size: 25,
+          //         color: Colors.amberAccent[700],
+          //       ),
+          //       SizedBox(
+          //         width: 10,
+          //       ),
+          //       FlutterSwitch(
+          //         width: 70.0,
+          //         height: 35.0,
+          //         valueFontSize: 10.0,
+          //         toggleSize: 25.0,
+          //         value: currentuser.passlan(),
+          //         borderRadius: 30.0,
+          //         padding: 8.0,
+          //         showOnOff: true,
+          //         inactiveText: "हिंदी",
+          //         activeText: "Eng",
+          //         activeColor: Colors.black,
+          //         inactiveColor: Colors.black,
+          //         onToggle: (val) {
+          //           setState(() {
+          //             _spin = true;
+          //             currentuser.language = val;
+          //             if (val == false) {
+          //               context.setLocale(Locale("en", "US"));
+          //             } else {
+          //               context.setLocale(Locale("hi", "IN"));
+          //             }
+          //             _spin = false;
+          //           });
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Spacer(),
           Center(
               child: Text(

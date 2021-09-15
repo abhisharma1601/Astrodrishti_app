@@ -24,89 +24,136 @@ class _dailyhrState extends State<dailyhr> {
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(10),
-        height: 600,
-        width: 400,
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(10)),
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                child: Text(
-                  widget.date,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold),
+            // Center(
+            //   child: Padding(
+            //     padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+            //     child: Text(
+            //       widget.date,
+            //       style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 40,
+            //           fontWeight: FontWeight.bold),
+            //     ),
+            //   ),
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: Horobox(
+                    sign: "Aries",
+                    txt: "   Aries     ",
+                    url:
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Aries.svg/1200px-Aries.svg.png",
+                  ),
                 ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Horobox(sign: "Aries", txt: "   Aries     "),
-                Horobox(sign: "Libra", txt: "    Libra    "),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Horobox(sign: "Virgo", txt: "   Virgo   "),
-                Horobox(sign: "Sagittarius", txt: "Sagittarius"),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Horobox(
-                  sign: "Aquarius",
-                  txt: "  Aquarius ",
-                ),
-                Horobox(sign: "Pisces", txt: "   Pisces  "),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Horobox(
-                  sign: "Gemini",
-                  txt: "   Gemini  ",
-                ),
-                Horobox(
-                  sign: "Taurus",
-                  txt: "   Taurus  ",
+                Expanded(
+                  child: Horobox(
+                    sign: "Libra",
+                    txt: "    Libra    ",
+                    url:
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Libra.svg/1200px-Libra.svg.png",
+                  ),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Horobox(
-                  sign: "Leo",
-                  txt: "     Leo     ",
+                Expanded(
+                  child: Horobox(
+                      sign: "Virgo",
+                      txt: "   Virgo   ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Virgo.svg/1200px-Virgo.svg.png"),
                 ),
-                Horobox(
-                  sign: "Scorpio",
-                  txt: "  Scorpio  ",
+                Expanded(
+                  child: Horobox(
+                      sign: "Sagittarius",
+                      txt: "Sagittarius",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sagittarius.svg/1200px-Sagittarius.svg.png"),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Horobox(
-                  sign: "Capricorn",
-                  txt: " Capricorn ",
+                Expanded(
+                  child: Horobox(
+                    sign: "Aquarius",
+                    txt: "  Aquarius ",
+                    url:
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Aquarius.svg/1200px-Aquarius.svg.png",
+                  ),
                 ),
-                Horobox(
-                  sign: "Cancer",
-                  txt: "   Cancer  ",
+                Expanded(
+                  child: Horobox(
+                      sign: "Pisces",
+                      txt: "   Pisces  ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pisces.svg/1200px-Pisces.svg.png"),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: Horobox(
+                      sign: "Gemini",
+                      txt: "   Gemini  ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gemini.svg/1200px-Gemini.svg.png"),
+                ),
+                Expanded(
+                  child: Horobox(
+                      sign: "Taurus",
+                      txt: "   Taurus  ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Taurus.svg/1200px-Taurus.svg.png"),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: Horobox(
+                      sign: "Leo",
+                      txt: "     Leo     ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Leo.svg/1200px-Leo.svg.png"),
+                ),
+                Expanded(
+                  child: Horobox(
+                      sign: "Scorpio",
+                      txt: "  Scorpio  ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Scorpio.svg/1200px-Scorpio.svg.png"),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(
+                  child: Horobox(
+                      sign: "Capricorn",
+                      txt: " Capricorn ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Capricorn.svg/1200px-Capricorn.svg.png"),
+                ),
+                Expanded(
+                  child: Horobox(
+                      sign: "Cancer",
+                      txt: "   Cancer  ",
+                      url:
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cancer.svg/1200px-Cancer.svg.png"),
                 ),
               ],
             ),
@@ -118,43 +165,53 @@ class _dailyhrState extends State<dailyhr> {
 }
 
 class Horobox extends StatelessWidget {
-  Horobox({required this.sign, required this.txt});
+  Horobox({required this.sign, required this.txt, required this.url});
   String sign;
   String txt;
+  String url;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        http.Response rest = await http
-            .get(Uri.parse("http://horoscope-api.herokuapp.com/horoscope/today/$sign"));
+        http.Response rest = await http.get(Uri.parse(
+            "http://horoscope-api.herokuapp.com/horoscope/today/$sign"));
         String dat = jsonDecode(rest.body)['horoscope'];
         showDialog(
           context: context,
           builder: (context) {
             return Dialog(
+              backgroundColor: Colors.transparent,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40)),
+                  borderRadius: BorderRadius.circular(10)),
               elevation: 16,
               child: Container(
+                height: 500,
+                
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.amberAccent.shade700)),
                 margin: EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
                     Text(
                       sign,
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
+                          color: Colors.amberAccent.shade700,
+                          fontSize: 35,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     Text(
                       dat,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold),
                     )
                   ],
@@ -165,20 +222,29 @@ class Horobox extends StatelessWidget {
         );
       },
       child: Container(
+        //height: 164,
         margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.amberAccent),
         ),
-        child: Text(
-          txt,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image(height: 90, image: NetworkImage(url)),
+            ),
+            Text(
+              txt,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -251,11 +251,13 @@ class _manglikState extends State<manglik> {
                       await gogg();
                       http.Response ress = await http.get(Uri.parse(
                           "https://api.vedicastroapi.com/json/dosha/mangaldosh?dob=$datei&tob=$timei&lat=$lat&lon=$lon&tz=$tmz&api_key=$keyy"));
+                      print(ress.body);
                       var dshtf =
                           jsonDecode(ress.body)["response"]['is_dosha_present'];
                       var dsh =
                           jsonDecode(ress.body)["response"]['bot_response'];
                       var score = jsonDecode(ress.body)["response"]['score'];
+
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -266,33 +268,33 @@ class _manglikState extends State<manglik> {
                             child: Container(
                               decoration: BoxDecoration(
                                   color: Colors.black,
-                                  border: Border.all(color: Colors.amberAccent.shade700),
+                                  border: Border.all(
+                                      color: Colors.amberAccent.shade700),
                                   borderRadius: BorderRadius.circular(10)),
                               height: 285,
-                              
                               padding: EdgeInsets.all(10),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
                                   Image.asset("images/mars.jpg",
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.17),                                
+                                              0.17),
                                   Center(
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 20, 0, 15),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 20, 0, 10),
                                       child: Text(
-                                        "${dshtf.toString().toUpperCase()}",
+                                        "${dshtf.toString().toUpperCase().replaceAll("NULL", "FALSE")}",
                                         style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold
-                                        ),
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
-                                  
                                   Padding(
                                     padding:
                                         const EdgeInsets.fromLTRB(8, 0, 0, 10),
@@ -301,12 +303,10 @@ class _manglikState extends State<manglik> {
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 20,
+                                        fontSize: 18,
                                       ),
                                     ),
                                   ),
-                                  
-                                 
                                 ],
                               ),
                             ),

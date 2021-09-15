@@ -339,7 +339,7 @@ class _page1State extends State<page1> {
                   });
                 },
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.238,
+                  height: 150,
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(

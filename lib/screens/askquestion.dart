@@ -71,7 +71,7 @@ class _AskQuestionState extends State<AskQuestion> {
         onTap: () {
           if (_textEditingController.text.replaceAll(" ", "") != "" &&
               _textEditingController.text != null) {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => py_pg(

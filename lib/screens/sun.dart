@@ -264,19 +264,29 @@ class _sunState extends State<sun> {
                                 borderRadius: BorderRadius.circular(10)),
                             elevation: 16,
                             child: Container(
-                              height: 39,
+                               decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(color: Colors.amberAccent.shade700),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 265,
+                              padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: <Widget>[
+                                  Image.asset("images/sun.jpg",
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.27), 
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                                        const EdgeInsets.fromLTRB(0, 4, 0, 8),
                                     child: Center(
                                       child: Text(
                                         dsh,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20,
+                                            fontSize: 28,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),

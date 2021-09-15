@@ -263,60 +263,40 @@ class _pitrState extends State<pitr> {
                                 borderRadius: BorderRadius.circular(40)),
                             elevation: 16,
                             child: Container(
-                              margin: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  border: Border.all(
+                                      color: Colors.amberAccent.shade700),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 285,
+                              padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
+                                  Image.asset("images/pitr.jpg",
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.17),
                                   Center(
-                                    child: Text(
-                                      "Pitra Dosh",
-                                      style: TextStyle(
-                                          color: Colors.amberAccent[700],
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 2, 0, 0),
-                                    child: Text(
-                                      "Dosha Present ?",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 0, 30),
-                                    child: Text(
-                                      dshtf.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 20, 0, 15),
+                                      child: Text(
+                                        "${dshtf.toString().toUpperCase()}",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(8, 2, 0, 0),
-                                    child: Text(
-                                      "Prediction",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 0, 30),
+                                        const EdgeInsets.fromLTRB(8, 0, 0, 10),
                                     child: Text(
                                       dsh,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,

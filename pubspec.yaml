@@ -52,7 +52,8 @@ dependencies:
   fluttertoast: ^8.0.7
   place_picker: ^0.9.18
   google_fonts: ^2.1.0
-  xml: 
+  xml:
+  localstorage: ^4.0.0+1 
   
   
 
