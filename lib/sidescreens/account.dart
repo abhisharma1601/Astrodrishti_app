@@ -1,3 +1,5 @@
+import 'package:astrodrishti_app/brain/smtp.dart';
+import 'package:astrodrishti_app/sidescreens/report_issue.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -76,26 +78,6 @@ class acc_page extends StatelessWidget {
                   onTap: () async {
                     var lenofcount;
                     String email = currentuser.passemail();
-                    try {
-                      var lennn = await FirebaseFirestore.instance
-                          .collection("Users")
-                          .doc("Orders")
-                          .collection(email)
-                          .doc("000000AAAAA")
-                          .get();
-                      lenofcount = (lennn.data() as dynamic)["count"];
-                      orderlist = [];
-                    } catch (e) {
-                      orderlist = [];
-                      orderlist.add(Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "No orders Yet !",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ));
-                      lenofcount = 1;
-                    }
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -109,46 +91,45 @@ class acc_page extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    final snapShot = await FirebaseFirestore.instance
-                        .collection("Users")
-                        .doc("emails")
-                        .collection(currentuser.passemail())
-                        .doc("AAAAAA")
-                        .get();
-                    if (snapShot.exists) {
-                      var lennn = await FirebaseFirestore.instance
-                          .collection("Users")
-                          .doc("emails")
-                          .collection(email)
-                          .doc("AAAAAA")
-                          .get();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => sv_kundli(
-                                    email: email,
-                                  )));
-                    } else {
-                      //print("get");
-                      FirebaseFirestore.instance
-                          .collection("Users")
-                          .doc("emails")
-                          .collection(email)
-                          .doc("AAAAAA")
-                          .set({"count": 1});
-                      var lennn = await FirebaseFirestore.instance
-                          .collection("Users")
-                          .doc("emails")
-                          .collection(email)
-                          .doc("AAAAAA")
-                          .get();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => sv_kundli(
-                                    email: email,
-                                  )));
-                    }
+                    // final snapShot = await FirebaseFirestore.instance
+                    //     .collection("Users")
+                    //     .doc("emails")
+                    //     .collection(currentuser.passemail())
+                    //     .doc("AAAAAA")
+                    //     .get();
+                    // if (snapShot.exists) {
+                    //   var lennn = await FirebaseFirestore.instance
+                    //       .collection("Users")
+                    //       .doc("emails")
+                    //       .collection(email)
+                    //       .doc("AAAAAA")
+                    //       .get();
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => sv_kundli(
+                    //                 email: email,
+                    //               )));
+                    // } else {
+                    //print("get");
+                    // FirebaseFirestore.instance
+                    //     .collection("Users")
+                    //     .doc("emails")
+                    //     .collection(email)
+                    //     .doc("AAAAAA")
+                    //     .set({"count": 1});
+                    // var lennn = await FirebaseFirestore.instance
+                    //     .collection("Users")
+                    //     .doc("emails")
+                    //     .collection(email)
+                    //     .doc("AAAAAA")
+                    //     .get();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => sv_kundli(
+                                  email: email,
+                                )));
                   },
                   child: ac_wid(
                     title: "Saved Data".tr(),
@@ -164,11 +145,14 @@ class acc_page extends StatelessWidget {
                     },
                     child: ac_wid(title: "About App".tr())),
                 GestureDetector(
-                    onTap: () {}, child: ac_wid(title: "Rate Us".tr())),
+                    onTap: () {
+                       Navigator.push(context,
+                          MaterialPageRoute(builder: (contxet) => Issue_Collector()));
+                    }, child: ac_wid(title: "Report Issue".tr())),
                 GestureDetector(
                     onTap: () {
                       Share.share(
-                          'Download our App AstroDrishti which guides you and tells you what is best and what not in life ahead to make it comfortable. https://4abhi45.github.io/astrodrishtiapp/astrodrishti.apk');
+                          'Download our App AstroDrishti which guides you and tells you what is best and what not in life ahead to make it comfortable. https://play.google.com/store/apps/details?id=in.astrodrishti.app');
                     },
                     child: ac_wid(title: "Share".tr())),
               ],
@@ -181,7 +165,8 @@ class acc_page extends StatelessWidget {
               gs.signOut();
               Navigator.pop(context);
               Navigator.pop(context);
-              Navigator.pop(context);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => start_page()));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

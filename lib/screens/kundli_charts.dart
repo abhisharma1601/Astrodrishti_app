@@ -28,7 +28,6 @@ class _Kundli_chartsState extends State<Kundli_charts> {
     if (charts.length == 0) {
       getcharts();
     }
-
     super.initState();
   }
 

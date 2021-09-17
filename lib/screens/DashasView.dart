@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,26 +30,13 @@ class _DashasViewState extends State<DashasView> {
       }
       _mahadashas.add(
         DashaWid(
-          name: jsonDecode(widget.m)["response"]["mahadasha"][i],
+          name:
+              jsonDecode(widget.m)["response"]["mahadasha"][i].toString().tr(),
           time:
               jsonDecode(widget.m)["response"]["mahadasha_order"][i].toString(),
           antarwids: _antartextwids,
         ),
       );
-
-      // print(
-      //     "${jsonDecode(widget.m)["response"]["mahadasha"][i]}---->till ${jsonDecode(widget.m)["response"]["mahadasha_order"][i].toString()}\n");
-      // for (int j = 0; j < 9; j++) {
-      //   _antartextwids.add(
-      //     antartext(
-      //       txt: jsonDecode(widget.a)["response"]["antardashas"][i][j]
-      //           .toString()
-      //           .replaceAll("/", " - "),
-      //     ),
-      //   );
-
-      // }
-
     }
 
     setState(() {});
@@ -100,7 +87,7 @@ class DashaWid extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                "(Till $time) :",
+                "(${"Till".tr()} $time) :",
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

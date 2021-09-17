@@ -26,7 +26,7 @@ class _orderstState extends State<orderst> {
           name: i.data()["Name"],
           date: i.data()["DOB"],
           id: i.data()["Order ID"].toString(),
-          state: i.data()["birthstate"],
+          state: i.data()["Pay_id"],
           urll: i.data()["url"],
           type: i.data()["Type"]));
     }
@@ -180,7 +180,7 @@ class bottomsheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 315,
+      height: 320,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.black,
@@ -217,7 +217,7 @@ class bottomsheet extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("${"Loc".tr()} $state",
+            child: Text("${"Payment ID".tr()} $state",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -233,8 +233,9 @@ class bottomsheet extends StatelessWidget {
                     fontSize: 25,
                     fontWeight: FontWeight.bold)),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 5),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () async {
@@ -247,7 +248,7 @@ class bottomsheet extends StatelessWidget {
                 },
                 child: Container(
                   height: 45,
-                  width: 115,
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -255,23 +256,27 @@ class bottomsheet extends StatelessWidget {
                       ),
                       color: Colors.black),
                   child: Center(
-                    child: Text(
-                      "Download".tr(),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Download".tr(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          " ${type.tr()}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 10),
-              Text(
-                " ${type.tr()}",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.normal),
               ),
             ],
           ),

@@ -82,25 +82,25 @@ class _KundliMenuState extends State<KundliMenu> {
   getbasic() async {
     List<Widget> tablelistlocal = [];
     tablelistlocal.add(
-      New_Tables(heading: "Basic Details", tablelist: [
+      New_Tables(heading: "Basic Details".tr(), tablelist: [
         TableRow(
-          children: [table_text(text: "Name"), table_text(text: widget.name)],
+          children: [table_text(text: "name".tr()), table_text(text: widget.name)],
         ),
         TableRow(
           children: [
-            table_text(text: "DOB"),
+            table_text(text: "DOB".tr()),
             table_text(text: widget.dob.toString())
           ],
         ),
         TableRow(
           children: [
-            table_text(text: "Birth Time"),
+            table_text(text: "Bt".tr()),
             table_text(text: widget.time.toString())
           ],
         ),
         TableRow(
           children: [
-            table_text(text: "Birth Place"),
+            table_text(text: "Loc".tr()),
             table_text(text: widget.place.toString())
           ],
         ),
@@ -112,30 +112,30 @@ class _KundliMenuState extends State<KundliMenu> {
     var datadecode = jsonDecode(data)["response"];
     tablelistlocal.add(
       New_Tables(
-        heading: "Kundli Details",
+        heading: "Kundli Details".tr(),
         tablelist: [
           TableRow(children: [
-            table_text(text: "Day"),
+            table_text(text: "Day".tr()),
             table_text(text: datadecode["day"]["name"])
           ]),
           TableRow(children: [
-            table_text(text: "Tithi"),
+            table_text(text: "Tithi".tr()),
             table_text(text: datadecode["tithi"]["name"])
           ]),
           TableRow(children: [
-            table_text(text: "Nakshatra"),
+            table_text(text: "Nakshatra".tr()),
             table_text(text: datadecode["nakshatra"]["name"])
           ]),
           TableRow(children: [
-            table_text(text: "Karna"),
+            table_text(text: "Karna".tr()),
             table_text(text: datadecode["karna"]["name"])
           ]),
           TableRow(children: [
-            table_text(text: "Yoga"),
+            table_text(text: "Yoga".tr()),
             table_text(text: datadecode["yoga"]["name"])
           ]),
           TableRow(children: [
-            table_text(text: "Rashi"),
+            table_text(text: "Rashi".tr()),
             table_text(text: datadecode["rasi"]["name"])
           ]),
         ],

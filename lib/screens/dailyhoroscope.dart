@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class dailyhr extends StatefulWidget {
   dailyhr({required this.date});
@@ -17,7 +18,7 @@ class _dailyhrState extends State<dailyhr> {
       appBar: AppBar(
         backgroundColor: Colors.amberAccent[700],
         title: Text(
-          "Daily Horoscope",
+          "Daily Horoscope".tr(),
           style: TextStyle(
             color: Colors.black,
             fontSize: 28,
@@ -46,7 +47,7 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                     sign: "Aries",
-                    txt: "   Aries     ",
+                    txt: "Aries".tr(),
                     url:
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Aries.svg/1200px-Aries.svg.png",
                   ),
@@ -54,7 +55,7 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                     sign: "Libra",
-                    txt: "    Libra    ",
+                    txt: "Libra".tr(),
                     url:
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Libra.svg/1200px-Libra.svg.png",
                   ),
@@ -67,14 +68,14 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                       sign: "Virgo",
-                      txt: "   Virgo   ",
+                      txt: "Virgo".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Virgo.svg/1200px-Virgo.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
                       sign: "Sagittarius",
-                      txt: "Sagittarius",
+                      txt: "Sagittarius".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sagittarius.svg/1200px-Sagittarius.svg.png"),
                 ),
@@ -86,7 +87,7 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                     sign: "Aquarius",
-                    txt: "  Aquarius ",
+                    txt: "Aquarius".tr(),
                     url:
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Aquarius.svg/1200px-Aquarius.svg.png",
                   ),
@@ -94,7 +95,7 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                       sign: "Pisces",
-                      txt: "   Pisces  ",
+                      txt: "Pisces".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pisces.svg/1200px-Pisces.svg.png"),
                 ),
@@ -106,14 +107,14 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                       sign: "Gemini",
-                      txt: "   Gemini  ",
+                      txt: "Gemini".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gemini.svg/1200px-Gemini.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
                       sign: "Taurus",
-                      txt: "   Taurus  ",
+                      txt: "Taurus".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Taurus.svg/1200px-Taurus.svg.png"),
                 ),
@@ -125,14 +126,14 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                       sign: "Leo",
-                      txt: "     Leo     ",
+                      txt: "Leo".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Leo.svg/1200px-Leo.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
                       sign: "Scorpio",
-                      txt: "  Scorpio  ",
+                      txt: "Scorpio".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Scorpio.svg/1200px-Scorpio.svg.png"),
                 ),
@@ -144,14 +145,14 @@ class _dailyhrState extends State<dailyhr> {
                 Expanded(
                   child: Horobox(
                       sign: "Capricorn",
-                      txt: " Capricorn ",
+                      txt: "Capricorn".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Capricorn.svg/1200px-Capricorn.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
                       sign: "Cancer",
-                      txt: "   Cancer  ",
+                      txt: "Cancer".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cancer.svg/1200px-Cancer.svg.png"),
                 ),

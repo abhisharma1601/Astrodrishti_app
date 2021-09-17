@@ -45,7 +45,12 @@ class _drawerState extends State<drawer> {
         children: <Widget>[
           Container(
             color: Colors.amberAccent.shade700,
-            padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.032,45,0,0,),
+            padding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.032,
+              45,
+              0,
+              0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -143,46 +148,26 @@ class _drawerState extends State<drawer> {
                     _spin = true;
                   });
                   String email = currentuser.passemail();
-                  final snapShot = await FirebaseFirestore.instance
-                      .collection("Users")
-                      .doc("emails")
-                      .collection(email)
-                      .doc("AAAAAA")
-                      .get();
-                  if (snapShot.exists) {
-                    var lennn = await FirebaseFirestore.instance
-                        .collection("Users")
-                        .doc("emails")
-                        .collection(email)
-                        .doc("AAAAAA")
-                        .get();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => sv_kundli(
-                                  email: email,
-                                )));
-                  } else {
-                    //print("get");
-                    // FirebaseFirestore.instance
-                    //     .collection("Users")
-                    //     .doc("emails")
-                    //     .collection(email)
-                    //     .doc("AAAAAA")
-                    //     .set({"count": 1});
-                    // var lennn = await FirebaseFirestore.instance
-                    //     .collection("Users")
-                    //     .doc("emails")
-                    //     .collection(email)
-                    //     .doc("AAAAAA")
-                    //     .get();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => sv_kundli(
-                                  email: email,
-                                )));
-                  }
+                  //print("get");
+                  // FirebaseFirestore.instance
+                  //     .collection("Users")
+                  //     .doc("emails")
+                  //     .collection(email)
+                  //     .doc("AAAAAA")
+                  //     .set({"count": 1});
+                  // var lennn = await FirebaseFirestore.instance
+                  //     .collection("Users")
+                  //     .doc("emails")
+                  //     .collection(email)
+                  //     .doc("AAAAAA")
+                  //     .get();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => sv_kundli(
+                                email: email,
+                              )));
+
                   setState(() {
                     _spin = false;
                   });
@@ -238,7 +223,7 @@ class _drawerState extends State<drawer> {
                     _spin = true;
                   });
                   Share.share(
-                      'Download our App AstroDrishti which guides you and tells you what is best and what not in life ahead to make it comfortable. https://4abhi45.github.io/astrodrishtiapp/astrodrishti.apk');
+                      'Download our App AstroDrishti which guides you and tells you what is best and what not in life ahead to make it comfortable. https://play.google.com/store/apps/details?id=in.astrodrishti.app');
                   setState(() {
                     _spin = false;
                   });
@@ -292,14 +277,19 @@ class _drawerState extends State<drawer> {
           //   ),
           // ),
           Spacer(),
-          Center(
-              child: Text(
-            "By StackX",
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.normal,
-                fontSize: 12),
-          )),
+          GestureDetector(
+            onTap: () {
+              launch("https://stackx.online");
+            },
+            child: Center(
+                child: Text(
+              "By StackX",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12),
+            )),
+          ),
           SizedBox(
             height: 10,
           )

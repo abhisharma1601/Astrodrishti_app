@@ -23,7 +23,7 @@ class _abt_viewState extends State<abt_view> {
         ),
         body: WebView(
           initialUrl:
-              'https://astrodrishti.github.io/astrodrishtiblogs/intro.html',
+              'https://4abhi45.github.io/astrodrishtiapp/',
           javascriptMode: JavascriptMode.unrestricted,
         ));
   }

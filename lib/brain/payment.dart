@@ -1,3 +1,4 @@
+import 'package:astrodrishti_app/brain/smtp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -10,16 +11,16 @@ import 'paymentint.dart';
 import 'wids.dart';
 
 class py_pg extends StatefulWidget {
-  py_pg(
-      {required this.pricee,
-      required this.type,
-      required this.lat,
-      required this.que,
-      required this.lon,
-      required this.name,
-      required this.dob,
-      required this.bt,
-      });
+  py_pg({
+    required this.pricee,
+    required this.type,
+    required this.lat,
+    required this.que,
+    required this.lon,
+    required this.name,
+    required this.dob,
+    required this.bt,
+  });
   String type, lat, lon, name, dob, bt, que;
   int pricee;
 
@@ -40,7 +41,21 @@ class _py_pgState extends State<py_pg> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    var orderid = await Random().nextInt(100000000);    
+    var orderid = await Random().nextInt(100000000);
+    mail(currentuser.passemail(), orderid, widget.type);
+    await FirebaseFirestore.instance.collection('Orders').doc("$orderid").set({
+      "Name": widget.name,
+      "DOB": widget.dob,
+      "Birthtime": widget.bt,
+      "Lat": widget.lat,
+      "Lon": widget.lon,
+      "Order ID": orderid,
+      "Type": widget.type,
+      "Email": currentuser.passemail(),
+      "Question": widget.que,
+      "Status": false,
+      "Pay_id": response.paymentId
+    });
     await FirebaseFirestore.instance
         .collection('Users')
         .doc("Orders")
@@ -49,15 +64,14 @@ class _py_pgState extends State<py_pg> {
         .set({
       "Name": widget.name,
       "DOB": widget.dob,
-      "Birthtime": widget.bt,      
+      "Birthtime": widget.bt,
       "Lat": widget.lat,
       "Lon": widget.lon,
       "Order ID": orderid,
       "Type": widget.type,
       "Question": widget.que,
       "url": "https://astrodrishti1601.github.io/thankyoupage/",
-      "Status": false,
-      "Pay_id":response.paymentId
+      "Pay_id": response.paymentId
     }).then(
       (value) => Navigator.pushReplacement(
         context,
