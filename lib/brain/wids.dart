@@ -349,13 +349,12 @@ gogg() async {
       .collection("AppData")
       .doc("APIKEY")
       .get();
- 
+
   keyy = (api_key_main.data() as dynamic)["key"];
   reportprice = (api_key_main.data() as dynamic)["price"];
   answerprice = (api_key_main.data() as dynamic)["question price"];
   keyrz = (api_key_main.data() as dynamic)["keyrz"];
   gkey = (api_key_main.data() as dynamic)["google_key"];
-  
 }
 
 final formdone = () => Fluttertoast.showToast(
