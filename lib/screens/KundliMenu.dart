@@ -73,7 +73,7 @@ class _KundliMenuState extends State<KundliMenu> {
 
     http.Response resa = await http.get(Uri.parse(
         "https://api.vedicastroapi.com/json/horoscope/antardasha?dob=${widget.dob}&tob=${widget.time}&lat=${widget.lat}&lon=${widget.lon}&tz=${widget.timezone}&api_key=$keyy"));
-    String dataa = await resa.body;   
+    String dataa = await resa.body;
     setState(() {
       widlist[3] = DashasView(m: datam, a: dataa);
     });
@@ -84,7 +84,10 @@ class _KundliMenuState extends State<KundliMenu> {
     tablelistlocal.add(
       New_Tables(heading: "Basic Details".tr(), tablelist: [
         TableRow(
-          children: [table_text(text: "name".tr()), table_text(text: widget.name)],
+          children: [
+            table_text(text: "name".tr()),
+            table_text(text: widget.name)
+          ],
         ),
         TableRow(
           children: [
@@ -230,24 +233,24 @@ class _KundliMenuState extends State<KundliMenu> {
           },
           items: [
             BottomNavigationBarItem(
-              label: "Details",
+              label: "Details".tr(),
               icon: Icon(Icons.notes),
             ),
             BottomNavigationBarItem(
-              label: "Charts",
+              label: "Charts".tr(),
               icon: Icon(Icons.table_chart),
             ),
             BottomNavigationBarItem(
-              label: "Planets",
+              label: "Planets".tr(),
               icon: Icon(Icons.wb_sunny),
             ),
             BottomNavigationBarItem(
-                label: "Dashas",
+                label: "Dashas".tr(),
                 icon: Icon(
                   Icons.timelapse,
                 )),
             BottomNavigationBarItem(
-              label: "Prediction",
+              label: "Prediction".tr(),
               icon: Icon(Icons.batch_prediction),
             ),
           ]),

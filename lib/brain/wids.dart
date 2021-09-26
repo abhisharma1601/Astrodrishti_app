@@ -227,7 +227,7 @@ class Pre_box extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
               child: Text(head,
                   style: TextStyle(
-                      decoration: TextDecoration.underline,
+                      //decoration: TextDecoration.underline,
                       color: Colors.amberAccent[700],
                       fontSize: 30,
                       fontWeight: FontWeight.bold)),

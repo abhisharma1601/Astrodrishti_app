@@ -6,8 +6,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:place_picker/entities/location_result.dart';
-import 'package:place_picker/widgets/place_picker.dart';
 
 class moon extends StatefulWidget {
   @override
@@ -271,15 +269,16 @@ class _moonState extends State<moon> {
                               //margin: EdgeInsets.all(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   Image.asset("images/moon.jpg",
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.27), 
+                                              0.19),
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                        const EdgeInsets.fromLTRB(0, 5, 0, 10),
                                     child: Center(
                                       child: Text(
                                         dsh,

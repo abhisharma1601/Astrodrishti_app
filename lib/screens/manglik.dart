@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:place_picker/entities/location_result.dart';
-import 'package:place_picker/widgets/place_picker.dart';
 
 class manglik extends StatefulWidget {
   @override

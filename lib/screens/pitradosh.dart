@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:place_picker/entities/location_result.dart';
-import 'package:place_picker/widgets/place_picker.dart';
 
 class pitr extends StatefulWidget {
   @override
@@ -271,7 +269,8 @@ class _pitrState extends State<pitr> {
                               height: 285,
                               padding: EdgeInsets.all(10),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
                                   Image.asset("images/pitr.jpg",

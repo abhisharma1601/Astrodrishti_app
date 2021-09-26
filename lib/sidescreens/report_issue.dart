@@ -42,9 +42,9 @@ class _Issue_CollectorState extends State<Issue_Collector> {
                   onChanged: (val) {
                     issue = val;
                   },
-                  style: TextStyle(color: Colors.white),                  
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: "Enter issue here !",                                    
+                    hintText: "Enter issue here !",
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -89,8 +89,6 @@ class _Issue_CollectorState extends State<Issue_Collector> {
 }
 
 Future<void> _mailer(issue) async {
-  
-
   // ignore: deprecated_member_use
   String username = "info@stackx.online";
   final smtpServer = SmtpServer("stackx.online",
@@ -103,7 +101,8 @@ Future<void> _mailer(issue) async {
   final message = Message()
     ..from = Address(username, 'StackX-AstroDrishti')
     ..recipients.add('StackX1617@gmail.com')
-    ..subject = 'Issue regarding Fitzen App! by ${currentuser.passemail()}'
+    ..subject =
+        'Issue regarding AstroDrishti App! by ${currentuser.passemail()}'
     ..text = issue;
 
   try {

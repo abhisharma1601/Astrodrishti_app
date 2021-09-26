@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:place_picker/entities/location_result.dart';
-import 'package:place_picker/widgets/place_picker.dart';
 
 class sun extends StatefulWidget {
   @override
@@ -264,23 +262,25 @@ class _sunState extends State<sun> {
                                 borderRadius: BorderRadius.circular(10)),
                             elevation: 16,
                             child: Container(
-                               decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: Colors.black,
-                                  border: Border.all(color: Colors.amberAccent.shade700),
+                                  border: Border.all(
+                                      color: Colors.amberAccent.shade700),
                                   borderRadius: BorderRadius.circular(10)),
                               height: 265,
                               padding: EdgeInsets.all(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   Image.asset("images/sun.jpg",
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.27), 
+                                              0.19),
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(0, 4, 0, 8),
+                                        const EdgeInsets.fromLTRB(0, 5, 0, 8),
                                     child: Center(
                                       child: Text(
                                         dsh,

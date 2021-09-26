@@ -49,8 +49,7 @@ dependencies:
   percent_indicator: ^3.0.1
   mailer: ^5.0.1
   flutter_switch: ^0.3.2
-  fluttertoast: ^8.0.7
-  place_picker: ^0.9.18
+  fluttertoast: ^8.0.7  
   google_fonts: ^2.1.0
   xml:
   localstorage: ^4.0.0+1 
