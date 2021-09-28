@@ -9,7 +9,7 @@ import 'startpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-String version = "0.1";
+String version = "0.2";
 
 String hemlo = "";
 void main() async {

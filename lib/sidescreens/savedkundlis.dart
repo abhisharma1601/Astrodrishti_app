@@ -40,6 +40,8 @@ class _sv_kundliState extends State<sv_kundli> {
               .collection("Users")
               .doc("emails")
               .collection(widget.email)
+              .doc("Kundlis")
+              .collection("Saved")
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {

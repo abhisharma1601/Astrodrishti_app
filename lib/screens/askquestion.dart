@@ -11,7 +11,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-
 import '../startpage.dart';
 
 class AskQuestion extends StatefulWidget {
@@ -20,15 +19,36 @@ class AskQuestion extends StatefulWidget {
   _AskQuestionState createState() => _AskQuestionState();
 }
 
+int _ansp = answerprice;
+
 class _AskQuestionState extends State<AskQuestion> {
   @override
   void initState() {
+    set_answerprice();
     super.initState();
     checknet();
   }
 
+  Future<void> set_answerprice() async {
+    try {
+      var snap = await FirebaseFirestore.instance
+          .collection("Users")
+          .doc("emails")
+          .collection(currentuser.passemail())
+          .doc("Data")
+          .get();
+      if (!(snap.data() as dynamic)["question_1"]) {
+        _ansp = 1;
+      } else {
+        _ansp = answerprice;
+      }
+    } catch (e) {
+      _ansp = answerprice;
+    }
+  }
+
   getLocationWithNominatim() async {
-     var coors = await picloc(context);
+    var coors = await picloc(context);
     try {
       lat = coors[0];
       lon = coors[1];
@@ -80,9 +100,8 @@ class _AskQuestionState extends State<AskQuestion> {
                           dob: datei,
                           bt: timei,
                           type: "Question",
-                         
                           name: currentuser.passname(),
-                          pricee: answerprice,
+                          pricee: _ansp,
                         )));
           } else {
             Fluttertoast.showToast(

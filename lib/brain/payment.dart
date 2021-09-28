@@ -43,6 +43,12 @@ class _py_pgState extends State<py_pg> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     var orderid = await Random().nextInt(100000000);
     mail(currentuser.passemail(), orderid, widget.type);
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("emails")
+        .collection(currentuser.passemail())
+        .doc("Data")
+        .set({"question_1": true}, SetOptions(merge: true));
     await FirebaseFirestore.instance.collection('Orders').doc("$orderid").set({
       "Name": widget.name,
       "DOB": widget.dob,

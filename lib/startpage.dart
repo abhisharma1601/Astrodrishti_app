@@ -8,6 +8,7 @@ import 'package:nice_button/nice_button.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'brain/userdata.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'brain/wids.dart';
 import 'screens/page1.dart';
 
@@ -41,47 +42,66 @@ class _start_pageState extends State<start_page> {
     setState(() {
       show = true;
     });
-    await gogg();
-    GoogleSignIn gs = GoogleSignIn(scopes: ['email']);
-    GoogleSignInAccount? google_user = await gs.signIn();
-    GoogleSignInAuthentication googleAuth = await google_user!.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
-    final UserCredential authResult =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    User? user = authResult.user;
     try {
-      context.setLocale(Locale("en", "US"));
-      language = false;
+      await gogg();
+      GoogleSignIn gs = GoogleSignIn(scopes: ['email']);
+      GoogleSignInAccount? google_user = await gs.signIn();
+      GoogleSignInAuthentication googleAuth = await google_user!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+      final UserCredential authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      User? user = authResult.user;
+      try {
+        var lan = await FirebaseFirestore.instance
+            .collection("Users")
+            .doc("emails")
+            .collection(user!.email as String)
+            .doc("Data")
+            .get();
+        context.setLocale(Locale("en", "US"));
+        language = false;
+        language = (lan.data() as dynamic)["Lan Bool"];
+        if (language) {
+          context.setLocale(Locale("hi", "IN"));
+        } else if (!language) {
+          context.setLocale(Locale("en", "US"));
+        }
+      } catch (e) {
+        context.setLocale(Locale("en", "US"));
+        language = false;
+      }
 
-      
-    
-      // language = (lan.data() as dynamic)["Lan Bool"];
-      // if (language) {
-      //   context.setLocale(Locale("hi", "IN"));
-      // } else if (!language) {
-      //   context.setLocale(Locale("en", "US"));
-      // }
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc("emails")
+          .collection(user!.email as String)
+          .doc("Data")
+          .set({
+        "Email": user.email as String,
+        "Name": user.displayName as String,
+        "Lan Bool": language
+      }, SetOptions(merge: true));
+
+      currentuser = UserData(
+          email: user.email as String,
+          pic: user.photoURL as String,
+          name: user.displayName as String,
+          language: language);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => page1(
+                    email: currentuser.passemail(),
+                  )));
+      setState(() {
+        show = false;
+      });
     } catch (e) {
-      context.setLocale(Locale("en", "US"));
-      language = false;
+      setState(() {
+        show = false;
+      });
     }
-
-    currentuser = UserData(
-        email: user!.email as String,
-        pic: user.photoURL as String,
-        name: user.displayName as String,
-        language: language);
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => page1(
-                  email: currentuser.passemail(),
-                )));
-    setState(() {
-      show = false;
-    });
   }
 
   @override
@@ -126,7 +146,6 @@ class _start_pageState extends State<start_page> {
                   ],
                 ),
               ),
-             
             ],
           ),
         ));

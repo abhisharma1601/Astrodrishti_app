@@ -260,6 +260,8 @@ class _KundliMenuState extends State<KundliMenu> {
               .collection("Users")
               .doc("emails")
               .collection(currentuser.email)
+              .doc("Kundlis")
+              .collection("Saved")
               .doc(widget.name)
               .set({
             "Name": widget.name,
