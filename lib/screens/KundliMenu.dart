@@ -280,11 +280,11 @@ class _KundliMenuState extends State<KundliMenu> {
             backgroundColor: Colors.amberAccent.shade700,
             radius: 30,
             child: CircleAvatar(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
               radius: 28,
               child: Icon(
                 Icons.save,
-                color: Colors.white,
+                color: Colors.black,
                 size: 35,
               ),
             ),

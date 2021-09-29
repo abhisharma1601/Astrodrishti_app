@@ -3,48 +3,24 @@ import 'dart:convert';
 import 'package:astrodrishti_app/brain/location_picker.dart';
 import 'package:astrodrishti_app/brain/payment.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:astrodrishti_app/main.dart';
+import 'package:astrodrishti_app/screens/KundliMenu.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-import '../startpage.dart';
-
-class AskQuestion extends StatefulWidget {
-  AskQuestion();
+class report_entry extends StatefulWidget {
   @override
-  _AskQuestionState createState() => _AskQuestionState();
+  _report_entryState createState() => _report_entryState();
 }
 
-int _ansp = answerprice;
-
-class _AskQuestionState extends State<AskQuestion> {
+class _report_entryState extends State<report_entry> {
   @override
   void initState() {
-    set_answerprice();
     super.initState();
     checknet();
-  }
-
-  Future<void> set_answerprice() async {
-    try {
-      var snap = await FirebaseFirestore.instance
-          .collection("Users")
-          .doc("emails")
-          .collection(currentuser.passemail())
-          .doc("Data")
-          .get();
-      if (!(snap.data() as dynamic)["question_1"]) {
-        _ansp = 1;
-      } else {
-        _ansp = answerprice;
-      }
-    } catch (e) {
-      _ansp = 1;
-    }
   }
 
   getLocationWithNominatim() async {
@@ -70,10 +46,6 @@ class _AskQuestionState extends State<AskQuestion> {
   @override
   bool spin = false;
   TextEditingController nameController = new TextEditingController();
-  late Map _pickedLocation;
-  var _pickedLocationText;
-  TextEditingController _textEditingController = TextEditingController();
-  //var geocoder = new Geocoder("652b38f6bdc04a62a89816aa15506b60");
   String loca = "Delhi, India";
   String lat = "28.70410001";
   String lon = "77.10250001", tmz = '5.5';
@@ -86,59 +58,6 @@ class _AskQuestionState extends State<AskQuestion> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          if (_textEditingController.text.replaceAll(" ", "") != "" &&
-              _textEditingController.text != null) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => py_pg(
-                          que: _textEditingController.text,
-                          lat: lat,
-                          lon: lon,
-                          dob: datei,
-                          bt: timei,
-                          type: "Question",
-                          name: currentuser.passname(),
-                          pricee: _ansp,
-                        )));
-          } else {
-            Fluttertoast.showToast(
-                msg: "Fill Full Form !".tr(),
-                textColor: Colors.black,
-                toastLength: Toast.LENGTH_LONG,
-                backgroundColor: Colors.white);
-          }
-        },
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.078,
-          width: MediaQuery.of(context).size.width * 0.28,
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.amberAccent.shade700),
-              borderRadius: BorderRadius.circular(20)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.send,
-                color: Colors.black,
-                size: MediaQuery.of(context).size.width * 0.065,
-              ),
-              SizedBox(height: 3),
-              Text(
-                "Register Question".tr(),
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10),
-              )
-            ],
-          ),
-        ),
-      ),
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.amberAccent[700],
@@ -146,7 +65,7 @@ class _AskQuestionState extends State<AskQuestion> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 40, 0),
             child: Text(
-              "Ask Question".tr(),
+              "Kundli Report",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -161,30 +80,21 @@ class _AskQuestionState extends State<AskQuestion> {
         progressIndicator: RefreshProgressIndicator(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 19, 16, 10),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                height: MediaQuery.of(context).size.height * 0.3,
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: TextField(
-                  style: TextStyle(color: Colors.black),
-                  controller: _textEditingController,
-                  textAlign: TextAlign.left,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: new InputDecoration(
-                    contentPadding: EdgeInsets.all(16),
-                    hintText: "Type You Question Here.....".tr(),
-                    hintStyle: TextStyle(color: Colors.black, fontSize: 20),
-                    border: InputBorder.none,
-                  ),
-                ),
+              padding: const EdgeInsets.fromLTRB(10, 20, 0, 10),
+              child: Text(
+                "enterdata".tr(),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 15, 10),
+              child: Txtfld(contro: nameController, txt: "ename".tr()),
             ),
             Row(
               children: <Widget>[
@@ -220,8 +130,8 @@ class _AskQuestionState extends State<AskQuestion> {
                         }
                       },
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(15, 5, 4, 5),
-                        padding: EdgeInsets.all(16),
+                        margin: EdgeInsets.fromLTRB(10, 5, 4, 5),
+                        padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           border:
                               Border.all(color: Colors.amberAccent.shade700),
@@ -230,7 +140,7 @@ class _AskQuestionState extends State<AskQuestion> {
                         child: Text(
                           "DOB: " + datei,
                           style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.044,
+                            fontSize: 16,
                             color: Colors.white.withOpacity(0.5),
                           ),
                         ),
@@ -247,7 +157,7 @@ class _AskQuestionState extends State<AskQuestion> {
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(4, 5, 15, 5),
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.amberAccent.shade700),
                         borderRadius: BorderRadius.circular(10),
@@ -255,7 +165,7 @@ class _AskQuestionState extends State<AskQuestion> {
                       child: Text(
                         "Bt".tr() + timei,
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.043,
+                          fontSize: 16,
                           color: Colors.white.withOpacity(0.5),
                         ),
                       ),
@@ -264,30 +174,64 @@ class _AskQuestionState extends State<AskQuestion> {
                 ),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 15, 0, 10),
+              child: Text(
+                "birthdetails".tr(),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             GestureDetector(
               onTap: () async {
                 setState(() {
                   spin = true;
                 });
                 await getLocationWithNominatim();
-                http.Response res = await http.get(Uri.parse(
-                    "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"));
-                http.Response ress = await http.get(Uri.parse(
-                    "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"));
+                http.Response res = await http.get(
+                  Uri.parse(
+                      "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"),
+                );
+
+                http.Response ress = await http.get(
+                  Uri.parse(
+                      "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"),
+                );
                 setState(() {
                   if (jsonDecode(res.body)["address"]["city"] == null) {
-                    loca = jsonDecode(res.body)["address"]["county"] +
-                        ", " +
-                        jsonDecode(res.body)["address"]["state"] +
-                        ", " +
-                        jsonDecode(res.body)["address"]["country"];
+                    if (jsonDecode(res.body)["address"]["village"] == null) {
+                      loca = jsonDecode(res.body)["address"]["town"]
+                              .toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["state"].toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["country"].toString();
+                    } else {
+                      loca = jsonDecode(res.body)["address"]["village"]
+                              .toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["state"].toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["country"].toString();
+                    }
                   } else {
-                    loca = jsonDecode(res.body)["address"]["city"] +
-                        ", " +
-                        jsonDecode(res.body)["address"]["state"] +
-                        ", " +
-                        jsonDecode(res.body)["address"]["country"];
+                    if (jsonDecode(res.body)["address"]["state"] == null) {
+                      loca = jsonDecode(res.body)["address"]["city"]
+                              .toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["country"].toString();
+                    } else {
+                      loca = jsonDecode(res.body)["address"]["city"]
+                              .toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["state"].toString() +
+                          ", " +
+                          jsonDecode(res.body)["address"]["country"].toString();
+                    }
                   }
+                  loca = loca.replaceAll("null", "");
                   tmz = (json.decode(ress.body)['gmtOffset'].toInt() / 3600)
                       .toString();
                   tmzdata = (json.decode(ress.body)['gmtOffset'].toInt() / 3600)
@@ -301,8 +245,8 @@ class _AskQuestionState extends State<AskQuestion> {
                 });
               },
               child: Container(
-                margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
-                padding: EdgeInsets.all(16),
+                margin: EdgeInsets.fromLTRB(10, 5, 15, 10),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.amberAccent.shade700),
                   borderRadius: BorderRadius.circular(10),
@@ -310,15 +254,15 @@ class _AskQuestionState extends State<AskQuestion> {
                 child: Text(
                   "Loc".tr() + loca,
                   style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.047,
+                    fontSize: 18,
                     color: Colors.white.withOpacity(0.5),
                   ),
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
-              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.fromLTRB(10, 5, 15, 0),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.amberAccent.shade700),
                 borderRadius: BorderRadius.circular(10),
@@ -326,11 +270,83 @@ class _AskQuestionState extends State<AskQuestion> {
               child: Text(
                 "Tmz".tr() + tmzdata,
                 style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.047,
+                  fontSize: 18,
                   color: Colors.white.withOpacity(0.5),
                 ),
               ),
             ),
+            Spacer(),
+            GestureDetector(
+              onTap: () async {
+                if (nameController.text == "" || tmz == "") {
+                  fullform();
+                } else {
+                  setState(() {
+                    spin = true;
+                  });
+                  print(lat);
+                  print(lon);
+                  await gogg();
+                  api kdap = api(
+                    date: datei,
+                    time: timei,
+                    lat: lat,
+                    long: lon,
+                    timezone: tmz,
+                  );
+                  var data = await kdap.apiwrk();
+
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => py_pg(
+                                type: "Report",
+                                pricee: reportprice,
+                                lat: lat,
+                                lon: lon,
+                                name: nameController.text,
+                                dob: datei,
+                                bt: timei,
+                                que: "No Question Only Report !",
+                              )));
+
+                  // Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => KundliMenu(
+                  //             planets: data[0],
+                  //             time: timei,
+                  //             name: nameController.text,
+                  //             timezone: tmz,
+                  //             lat: lat,
+                  //             lon: lon,
+                  //             place: loca,
+                  //             dob: datei)));
+
+                  setState(() {
+                    spin = false;
+                  });
+                }
+              },
+              child: Container(
+                margin: EdgeInsets.fromLTRB(14, 0, 15, 14),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.amberAccent[700],
+                  borderRadius: BorderRadius.circular(6),
+                  //border: Border.all(color: Colors.white),
+                ),
+                child: Center(
+                  child: Text(
+                    "Order Report",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

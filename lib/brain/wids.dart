@@ -318,6 +318,8 @@ class svbox extends StatelessWidget {
                         .collection("Users")
                         .doc("emails")
                         .collection(email)
+                        .doc("Kundlis")
+                        .collection("Saved")
                         .doc(data)
                         .delete();
                   },
