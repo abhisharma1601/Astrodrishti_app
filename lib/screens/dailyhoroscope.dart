@@ -16,6 +16,7 @@ class _dailyhrState extends State<dailyhr> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent[700],
         title: Text(
           "Daily Horoscope".tr(),
@@ -188,7 +189,6 @@ class Horobox extends StatelessWidget {
               elevation: 16,
               child: Container(
                 height: 500,
-                
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     color: Colors.black,

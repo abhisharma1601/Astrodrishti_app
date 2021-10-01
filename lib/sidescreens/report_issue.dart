@@ -20,6 +20,7 @@ class _Issue_CollectorState extends State<Issue_Collector> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent.shade700,
         title: Text(
           "Report Issues",

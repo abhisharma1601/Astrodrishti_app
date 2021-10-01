@@ -13,6 +13,7 @@ class _web_vvState extends State<web_vv> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent[700],
         title: Text(
           "Blogs".tr(),

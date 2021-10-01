@@ -1,4 +1,6 @@
 // @dart=2.9
+import 'dart:ffi';
+
 import 'package:astrodrishti_app/update.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,7 @@ import 'startpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-String version = "0.3";
+int version = 1;
 
 String hemlo = "";
 void main() async {
@@ -45,8 +47,8 @@ class _MyAppState extends State<MyApp> {
         .collection("AppData")
         .doc("update")
         .get();
-    String ver = (snap.data() as dynamic)["version"];
-    if (version == ver) {
+    int ver = (snap.data() as dynamic)["Version"];
+    if (version >= ver) {
       setState(() {
         startpage = start_page();
       });

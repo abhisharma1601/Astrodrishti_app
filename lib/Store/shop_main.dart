@@ -94,11 +94,9 @@ class _ShopState extends State<Shop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: drawer(),
-      ),
       backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent[700],
         title: Center(
           child: Padding(
@@ -107,7 +105,7 @@ class _ShopState extends State<Shop> {
               "AstroDrishti Shop".tr(),
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width * 0.070,
+                  fontSize: MediaQuery.of(context).size.width * 0.065,
                   fontWeight: FontWeight.bold),
             ),
           ),

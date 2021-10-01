@@ -49,13 +49,16 @@ class _py_pgState extends State<py_pg> {
         .collection(currentuser.passemail())
         .doc("Data")
         .set({"question_1": true}, SetOptions(merge: true));
-    await FirebaseFirestore.instance.collection('Orders').doc("$orderid").set({
+    await FirebaseFirestore.instance
+        .collection('Orders')
+        .doc(DateTime.now().toString())
+        .set({
       "Name": widget.name,
       "DOB": widget.dob,
       "Birthtime": widget.bt,
       "Lat": widget.lat,
       "Lon": widget.lon,
-      "Order ID": orderid,
+      "OID": orderid,
       "Type": widget.type,
       "Email": currentuser.passemail(),
       "Question": widget.que,

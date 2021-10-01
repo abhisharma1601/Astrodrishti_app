@@ -12,6 +12,7 @@ class _abt_viewState extends State<abt_view> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.amberAccent[700],
           title: Text(
             "About App".tr(),
@@ -22,8 +23,7 @@ class _abt_viewState extends State<abt_view> {
           ),
         ),
         body: WebView(
-          initialUrl:
-              'https://4abhi45.github.io/astrodrishtiapp/',
+          initialUrl: 'https://4abhi45.github.io/astrodrishtiapp/',
           javascriptMode: JavascriptMode.unrestricted,
         ));
   }

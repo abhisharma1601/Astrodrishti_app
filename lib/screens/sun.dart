@@ -61,6 +61,7 @@ class _sunState extends State<sun> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent[700],
         title: Center(
           child: Padding(

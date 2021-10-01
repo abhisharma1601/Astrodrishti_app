@@ -127,19 +127,37 @@ class _page1State extends State<page1> {
       ),
       backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent[700],
-        title: Center(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 40, 0),
-            child: Text(
-              "AstroDrishti 卐".tr(),
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width * 0.070,
-                  fontWeight: FontWeight.bold),
-            ),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          child: Text(
+            "AstroDrishti".tr(),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: MediaQuery.of(context).size.width * 0.065,
+                fontWeight: FontWeight.bold),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Shop(email: currentuser.passemail())));
+              },
+              child: Icon(
+                Icons.shopping_cart,
+                color: Colors.black,
+                size: 30,
+              ),
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: ModalProgressHUD(
