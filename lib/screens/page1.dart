@@ -14,7 +14,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../startpage.dart';
-import 'askquestion.dart';
+import '../Store/askquestion.dart';
 import 'dailyhoroscope.dart';
 import 'dataentry.dart';
 import 'manglik.dart';

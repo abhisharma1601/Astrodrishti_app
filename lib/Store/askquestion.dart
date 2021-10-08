@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:astrodrishti_app/Store/astrologers.dart';
 import 'package:astrodrishti_app/brain/location_picker.dart';
 import 'package:astrodrishti_app/brain/payment.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/painting.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
@@ -20,12 +23,16 @@ class AskQuestion extends StatefulWidget {
 }
 
 int _ansp = answerprice;
+int astro_id = 0;
+String astroname = "Select Astrologer";
 
 class _AskQuestionState extends State<AskQuestion> {
   @override
   void initState() {
     set_answerprice();
     super.initState();
+    astro_id = 0;
+    astroname = "Select Astrologer";
     checknet();
   }
 
@@ -38,12 +45,12 @@ class _AskQuestionState extends State<AskQuestion> {
           .doc("Data")
           .get();
       if (!(snap.data() as dynamic)["question_1"]) {
-        _ansp = 1;
+        _ansp = 11;
       } else {
         _ansp = answerprice;
       }
     } catch (e) {
-      _ansp = 1;
+      _ansp = 11;
     }
   }
 
@@ -90,19 +97,28 @@ class _AskQuestionState extends State<AskQuestion> {
         onTap: () {
           if (_textEditingController.text.replaceAll(" ", "") != "" &&
               _textEditingController.text != null) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => py_pg(
-                          que: _textEditingController.text,
-                          lat: lat,
-                          lon: lon,
-                          dob: datei,
-                          bt: timei,
-                          type: "Question",
-                          name: currentuser.passname(),
-                          pricee: _ansp,
-                        )));
+            if (astro_id != 0) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => py_pg(
+                            que: _textEditingController.text,
+                            lat: lat,
+                            lon: lon,
+                            dob: datei,
+                            bt: timei,
+                            type: "Question",
+                            astro_id: astro_id,
+                            name: currentuser.passname(),
+                            pricee: _ansp,
+                          )));
+            } else {
+              Fluttertoast.showToast(
+                  msg: "Select Your Astrologer!".tr(),
+                  textColor: Colors.black,
+                  toastLength: Toast.LENGTH_LONG,
+                  backgroundColor: Colors.white);
+            }
           } else {
             Fluttertoast.showToast(
                 msg: "Fill Full Form !".tr(),
@@ -317,18 +333,39 @@ class _AskQuestionState extends State<AskQuestion> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.amberAccent.shade700),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                "Tmz".tr() + tmzdata,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.047,
-                  color: Colors.white.withOpacity(0.5),
+            // Container(
+            //   margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
+            //   padding: EdgeInsets.all(16),
+            //   decoration: BoxDecoration(
+            //     border: Border.all(color: Colors.amberAccent.shade700),
+            //     borderRadius: BorderRadius.circular(10),
+            //   ),
+            //   child: Text(
+            //     "Tmz".tr() + tmzdata,
+            //     style: TextStyle(
+            //       fontSize: MediaQuery.of(context).size.width * 0.047,
+            //       color: Colors.white.withOpacity(0.5),
+            //     ),
+            //   ),
+            // ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Astrologers()));
+              },
+              child: Container(
+                margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.amberAccent.shade700),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  astroname,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.047,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
                 ),
               ),
             ),

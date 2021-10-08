@@ -1,5 +1,5 @@
 import 'package:astrodrishti_app/brain/wids.dart';
-import 'package:astrodrishti_app/screens/askquestion.dart';
+import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

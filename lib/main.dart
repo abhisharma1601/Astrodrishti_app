@@ -72,9 +72,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        textTheme: GoogleFonts.aBeeZeeTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        // textTheme: GoogleFonts.aBeeZeeTextTheme(
+        //   Theme.of(context).textTheme,
+        // ),
       ),
       home: startpage,
     );

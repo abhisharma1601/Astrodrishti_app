@@ -1,3 +1,5 @@
+import 'package:astrodrishti_app/Store/askquestion.dart';
+import 'package:astrodrishti_app/Store/astrologers.dart';
 import 'package:astrodrishti_app/brain/payment.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:flutter/material.dart';
@@ -69,22 +71,28 @@ class _result_pageState extends State<result_page> {
           });
           em = currentuser.passemail();
 
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => py_pg(
-                        type: "Report",
-                        pricee: reportprice,
-                        lat: widget.lat,
-                        lon: widget.lon,
-                        name: widget.name,
-                        dob: widget.dob,
-                        bt: widget.bt,
-                        que: "No Question Only Report !",
-                      )));
-          setState(() {
-            spin = false;
-          });
+          if (astro_id == 0) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Astrologers()));
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => py_pg(
+                          type: "Report",
+                          pricee: reportprice,
+                          lat: widget.lat,
+                          lon: widget.lon,
+                          astro_id: astro_id,
+                          name: widget.name,
+                          dob: widget.dob,
+                          bt: widget.bt,
+                          que: "No Question Only Report !",
+                        )));
+            setState(() {
+              spin = false;
+            });
+          }
         },
         child: CircleAvatar(
           backgroundColor: Colors.amberAccent[700],
@@ -175,6 +183,12 @@ class _result_pageState extends State<result_page> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    astro_id = 0;
+    super.initState();
   }
 
   // @override

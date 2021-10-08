@@ -1,3 +1,4 @@
+import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:astrodrishti_app/brain/smtp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,13 @@ class py_pg extends StatefulWidget {
     required this.lat,
     required this.que,
     required this.lon,
+    required this.astro_id,
     required this.name,
     required this.dob,
     required this.bt,
   });
   String type, lat, lon, name, dob, bt, que;
-  int pricee;
+  int pricee, astro_id;
 
   @override
   _py_pgState createState() => _py_pgState();
@@ -61,6 +63,7 @@ class _py_pgState extends State<py_pg> {
       "OID": orderid,
       "Type": widget.type,
       "Email": currentuser.passemail(),
+      "astro_id": astro_id,
       "Question": widget.que,
       "Status": false,
       "Pay_id": response.paymentId

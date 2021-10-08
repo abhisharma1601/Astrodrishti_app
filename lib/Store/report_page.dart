@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:astrodrishti_app/Store/askquestion.dart';
+import 'package:astrodrishti_app/Store/astrologers.dart';
 import 'package:astrodrishti_app/brain/location_picker.dart';
 import 'package:astrodrishti_app/brain/payment.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
@@ -20,6 +22,7 @@ class _report_entryState extends State<report_entry> {
   @override
   void initState() {
     super.initState();
+    astro_id = 0;
     checknet();
   }
 
@@ -261,18 +264,39 @@ class _report_entryState extends State<report_entry> {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(10, 5, 15, 0),
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.amberAccent.shade700),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                "Tmz".tr() + tmzdata,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white.withOpacity(0.5),
+            // Container(
+            //   margin: EdgeInsets.fromLTRB(10, 5, 15, 0),
+            //   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            //   decoration: BoxDecoration(
+            //     border: Border.all(color: Colors.amberAccent.shade700),
+            //     borderRadius: BorderRadius.circular(10),
+            //   ),
+            //   child: Text(
+            //     "Tmz".tr() + tmzdata,
+            //     style: TextStyle(
+            //       fontSize: 18,
+            //       color: Colors.white.withOpacity(0.5),
+            //     ),
+            //   ),
+            // ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Astrologers()));
+              },
+              child: Container(
+                margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.amberAccent.shade700),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  astroname,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.047,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
                 ),
               ),
             ),
@@ -298,18 +322,21 @@ class _report_entryState extends State<report_entry> {
                   var data = await kdap.apiwrk();
 
                   Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => py_pg(
-                                type: "Report",
-                                pricee: reportprice,
-                                lat: lat,
-                                lon: lon,
-                                name: nameController.text,
-                                dob: datei,
-                                bt: timei,
-                                que: "No Question Only Report !",
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => py_pg(
+                        type: "Report",
+                        pricee: reportprice,
+                        lat: lat,
+                        lon: lon,
+                        astro_id: astro_id,
+                        name: nameController.text,
+                        dob: datei,
+                        bt: timei,
+                        que: "No Question Only Report !",
+                      ),
+                    ),
+                  );
 
                   // Navigator.pushReplacement(
                   //     context,

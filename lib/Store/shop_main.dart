@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:astrodrishti_app/Store/report_page.dart';
-import 'package:astrodrishti_app/screens/askquestion.dart';
+import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:astrodrishti_app/screens/dailyhoroscope.dart';
 import 'package:astrodrishti_app/screens/dataentry.dart';
 import 'package:astrodrishti_app/sidescreens/drawer.dart';

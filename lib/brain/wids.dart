@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:astrodrishti_app/main.dart';
 import 'package:astrodrishti_app/screens/KundliMenu.dart';
@@ -12,6 +13,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:xml/xml.dart';
+
+double roundDouble(double value, int places) {
+  num mod = pow(10.0, places);
+  return ((value * mod).round().toDouble() / mod);
+}
 
 class api {
   api({
