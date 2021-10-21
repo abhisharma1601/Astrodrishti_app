@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:astrodrishti_app/brain/brain.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:astrodrishti_app/screens/DashasView.dart';
@@ -51,6 +52,7 @@ class _KundliMenuState extends State<KundliMenu> {
 
   @override
   void initState() {
+    astro_id = 0;
     charts = [];
     savevis = true;
     widlist[1] = Kundli_charts(

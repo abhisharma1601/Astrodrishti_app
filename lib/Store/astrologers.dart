@@ -1,8 +1,10 @@
 import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:astrodrishti_app/cubit/astrocubit_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Astrologers extends StatefulWidget {
@@ -27,9 +29,11 @@ class _AstrologersState extends State<Astrologers> {
     var key = await FirebaseFirestore.instance.collection("Astrologers").get();
     for (var i in key.docs) {
       if (i.data()["Status"] &&
+          i.data()["CAPQ"] < 12 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) ==
               5.0) {
         astrologers.add(Astrologer_Wid(
+            dis: i.data()["Disc"],
             name: i.data()["Name"],
             rate: i.data()["Total_Rating"] / i.data()["Ratings"],
             exp: i.data()["Experience"],
@@ -39,10 +43,12 @@ class _AstrologersState extends State<Astrologers> {
     }
     for (var i in key.docs) {
       if (i.data()["Status"] &&
+          i.data()["CAPQ"] < 12 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) >= 4 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) < 5) {
         astrologers.add(Astrologer_Wid(
             name: i.data()["Name"],
+            dis: i.data()["Disc"],
             rate: i.data()["Total_Rating"] / i.data()["Ratings"],
             exp: i.data()["Experience"],
             pic: i.data()["Pic"],
@@ -51,9 +57,11 @@ class _AstrologersState extends State<Astrologers> {
     }
     for (var i in key.docs) {
       if (i.data()["Status"] &&
+          i.data()["CAPQ"] < 12 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) >= 3 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) < 4) {
         astrologers.add(Astrologer_Wid(
+            dis: i.data()["Disc"],
             name: i.data()["Name"],
             rate: i.data()["Total_Rating"] / i.data()["Ratings"],
             exp: i.data()["Experience"],
@@ -63,9 +71,11 @@ class _AstrologersState extends State<Astrologers> {
     }
     for (var i in key.docs) {
       if (i.data()["Status"] &&
+          i.data()["CAPQ"] < 12 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) >= 2 &&
           roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) < 3) {
         astrologers.add(Astrologer_Wid(
+            dis: i.data()["Disc"],
             name: i.data()["Name"],
             rate: i.data()["Total_Rating"] / i.data()["Ratings"],
             exp: i.data()["Experience"],
@@ -102,8 +112,9 @@ class Astrologer_Wid extends StatelessWidget {
       required this.exp,
       required this.rate,
       required this.pic,
+      required this.dis,
       required this.id});
-  String name, pic;
+  String name, pic, dis;
   int exp, id;
   var rate;
 
@@ -111,12 +122,15 @@ class Astrologer_Wid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print(id);
+        BlocProvider.of<AstrocubitCubit>(context)
+            .update_Name("Selected: $name");
         astro_id = id;
         Fluttertoast.showToast(msg: "Astrologer Selected");
         Navigator.pop(context);
       },
       child: Container(
-        height: 135,
+        // height: 145,
         margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -127,25 +141,40 @@ class Astrologer_Wid extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-            CircleAvatar(
-              radius: 57,
-              backgroundColor: Colors.amberAccent.shade700,
-              child: CircleAvatar(
-                radius: 56,
-                backgroundImage: NetworkImage(pic),
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 47,
+                  backgroundColor: Colors.amberAccent.shade700,
+                  child: CircleAvatar(
+                    radius: 46,
+                    backgroundImage: NetworkImage(pic),
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  "${roundDouble(rate, 2)}/5",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.white),
+                ),
+              ],
             ),
-            Spacer(),
+            SizedBox(
+              width: 15,
+            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 30, 10),
+              padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Pt. $name",
+                    "$name",
                     style: TextStyle(
-                        fontSize: 26,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
@@ -156,19 +185,25 @@ class Astrologer_Wid extends StatelessWidget {
                       Text(
                         "Experience: $exp years",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.normal,
                             color: Colors.white),
                       ),
                       SizedBox(
                         height: 6,
                       ),
-                      Text(
-                        "Rating:   ${roundDouble(rate, 2)}/5",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      Container(
+                        width: 205,
+                        height: 57,
+                        child: SingleChildScrollView(
+                          child: Text(
+                            dis,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
                       ),
                     ],
                   )

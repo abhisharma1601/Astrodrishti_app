@@ -1,17 +1,19 @@
 // @dart=2.9
 import 'dart:ffi';
-
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:astrodrishti_app/update.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'cubit/astrocubit_cubit.dart';
 import 'sidescreens/loading.dart';
 import 'startpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-int version = 1;
+int version = 2;
 
 String hemlo = "";
 void main() async {
@@ -65,18 +67,21 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
     ]);
 
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        // textTheme: GoogleFonts.aBeeZeeTextTheme(
-        //   Theme.of(context).textTheme,
-        // ),
+    return BlocProvider(
+      create: (context) => AstrocubitCubit(),
+      child: MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          // textTheme: GoogleFonts.aBeeZeeTextTheme(
+          //   Theme.of(context).textTheme,
+          // ),
+        ),
+        home: startpage,
       ),
-      home: startpage,
     );
   }
 }

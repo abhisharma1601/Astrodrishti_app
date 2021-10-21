@@ -351,6 +351,8 @@ String gkey = null as String;
 List<Widget> charts = [];
 bool savevis = true;
 String link = "";
+String report_url = "";
+String question_url = "";
 
 gogg() async {
   var api_key_main = await FirebaseFirestore.instance
@@ -363,6 +365,12 @@ gogg() async {
   answerprice = (api_key_main.data() as dynamic)["question price"];
   keyrz = (api_key_main.data() as dynamic)["keyrz"];
   gkey = (api_key_main.data() as dynamic)["google_key"];
+  var key = await FirebaseFirestore.instance
+      .collection("AppData")
+      .doc("ad_post")
+      .get();
+  report_url = await (key.data() as dynamic)["report_url"];
+  question_url = await (key.data() as dynamic)["question_url"];
 }
 
 final formdone = () => Fluttertoast.showToast(

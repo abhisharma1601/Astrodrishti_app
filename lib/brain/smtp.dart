@@ -1,15 +1,16 @@
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
-void mail(email, orderid,type) async {
-  // Use the SmtpServer class to configure an SMTP server:
-  String username = "info@stackx.online";
-  final smtpServer = SmtpServer("stackx.online",
-      ignoreBadCertificate: true,
-      username: username,
-      password: "StackX@123",
-      allowInsecure: true);
+// Use the SmtpServer class to configure an SMTP server:
 
+String username = "info@stackx.online";
+final smtpServer = SmtpServer("stackx.online",
+    ignoreBadCertificate: true,
+    username: username,
+    password: "StackX@123",
+    allowInsecure: true);
+
+void mail(email, orderid, type) async {
   // Create our message.
   final message = Message()
     ..from = Address(username, "StackX-AstroDrishti")
@@ -22,12 +23,35 @@ void mail(email, orderid,type) async {
     ..from = Address(username, "StackX-AstroDrishti")
     ..recipients.add('StackX1617@gmail.com')
     ..subject = 'New Order With with id $orderid'
-    ..text =
-        "Type of order is $type";
+    ..text = "Type of order is $type";
 
   try {
     final sendReport = await send(message, smtpServer);
     await send(order_up, smtpServer);
+    print('Message sent: ' + sendReport.toString());
+  } on MailerException catch (e) {
+    print(e);
+    print('Message not sent.');
+    for (var p in e.problems) {
+      print('Problem: ${p.code}: ${p.msg}');
+    }
+  }
+}
+
+void notify(astro_email, orderid, type, astroid) async {
+  print("aide hi hi");
+  print(astro_email);
+
+  final notifyMessage = Message()
+    ..from = Address(username, "StackX-AstroDrishti")
+    ..recipients.add(astro_email.toString())
+    ..subject = 'You have a new question with id $orderid'
+    ..text =
+        "Type of order is $type.\nYour astro_id: $astroid.\nTry answering it as soon as possible.\nAll the best.";
+
+  try {
+    final sendReport = await send(notifyMessage, smtpServer);
+    await send(notifyMessage, smtpServer);
     print('Message sent: ' + sendReport.toString());
   } on MailerException catch (e) {
     print(e);

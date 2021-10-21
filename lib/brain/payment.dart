@@ -18,12 +18,14 @@ class py_pg extends StatefulWidget {
     required this.lat,
     required this.que,
     required this.lon,
+    // ignore: non_constant_identifier_names
     required this.astro_id,
     required this.name,
     required this.dob,
     required this.bt,
   });
   String type, lat, lon, name, dob, bt, que;
+  // ignore: non_constant_identifier_names
   int pricee, astro_id;
 
   @override
@@ -34,6 +36,9 @@ class _py_pgState extends State<py_pg> {
   @override
   void initState() {
     prc = widget.pricee;
+    if (prc == 11) {
+      widget.type = "Offer_Question";
+    }
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -44,13 +49,41 @@ class _py_pgState extends State<py_pg> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     var orderid = await Random().nextInt(100000000);
+
     mail(currentuser.passemail(), orderid, widget.type);
+
+    var key = await FirebaseFirestore.instance
+        .collection("Astrologers")
+        .where('astro_id', isEqualTo: widget.astro_id)
+        .get();
+    String docval = "";
+    for (var i in key.docs) {
+      docval = await i.data()["email"];
+    }
+    print("aide hi");
+    print(widget.type);
+
+    if (widget.type == "Question" || widget.type == "Offer_Question") {
+      FirebaseFirestore.instance
+          .collection("Astrologers")
+          .doc(docval)
+          .update({"CAPQ": FieldValue.increment(1)});
+      notify(docval, orderid, widget.type, widget.astro_id);
+    } else if (widget.type == "Report") {
+      FirebaseFirestore.instance
+          .collection("Astrologers")
+          .doc(docval)
+          .update({"CAPR": FieldValue.increment(1)});
+      notify(docval, orderid, widget.type, widget.astro_id);
+    }
+
     FirebaseFirestore.instance
         .collection("Users")
         .doc("emails")
         .collection(currentuser.passemail())
         .doc("Data")
         .set({"question_1": true}, SetOptions(merge: true));
+
     await FirebaseFirestore.instance
         .collection('Orders')
         .doc(DateTime.now().toString())
@@ -66,8 +99,10 @@ class _py_pgState extends State<py_pg> {
       "astro_id": astro_id,
       "Question": widget.que,
       "Status": false,
+      "reviewed": "show",
       "Pay_id": response.paymentId
     });
+
     await FirebaseFirestore.instance
         .collection('Users')
         .doc("Orders")

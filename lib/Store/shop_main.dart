@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:astrodrishti_app/Store/report_page.dart';
 import 'package:astrodrishti_app/Store/askquestion.dart';
+import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:astrodrishti_app/screens/dailyhoroscope.dart';
 import 'package:astrodrishti_app/screens/dataentry.dart';
 import 'package:astrodrishti_app/sidescreens/drawer.dart';
@@ -32,7 +33,19 @@ class _ShopState extends State<Shop> {
   @override
   void initState() {
     super.initState();
+    print(report_url);
+    print(question_url);
   }
+
+  // Future<void> getimages() async {
+  //   var key = await FirebaseFirestore.instance
+  //       .collection("AppData")
+  //       .doc("ad_post")
+  //       .get();
+  //   _report_url = await (key.data() as dynamic)["report_url"];
+  //   _question_url = await (key.data() as dynamic)["question_url"];
+  //   setState(() {});
+  // }
 
   Future<void> checkbanner() async {
     try {
@@ -143,8 +156,7 @@ class _ShopState extends State<Shop> {
                   border: Border.all(color: Colors.amberAccent.shade700),
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: AssetImage("images/report.jpg"),
-                      fit: BoxFit.fitWidth),
+                      image: NetworkImage(report_url), fit: BoxFit.fitWidth),
                 ),
               ),
             ),
@@ -171,8 +183,7 @@ class _ShopState extends State<Shop> {
                   border: Border.all(color: Colors.amberAccent.shade700),
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: AssetImage("images/que.png"),
-                      fit: BoxFit.fitWidth),
+                      image: NetworkImage(question_url), fit: BoxFit.fitWidth),
                 ),
               ),
             ),
