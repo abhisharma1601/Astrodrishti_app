@@ -1,6 +1,9 @@
+import 'package:astrodrishti_app/sidescreens/blogs.dart';
+import 'package:astrodrishti_app/sidescreens/order_query.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class orderst extends StatefulWidget {
@@ -244,7 +247,11 @@ class bottomsheet extends StatelessWidget {
                     print("22");
                     launch(urle);
                   } else {
-                    throw 'Could not launch $urle';
+                    print(urle);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => order_query(url: urle)));
                   }
                 },
                 child: Container(

@@ -25,16 +25,26 @@ class AskQuestion extends StatefulWidget {
 }
 
 int _ansp = answerprice;
+late int _ofsp = 0;
 int astro_id = 0;
 
 class _AskQuestionState extends State<AskQuestion> {
   @override
   void initState() {
-    set_answerprice();
+    // set_answerprice();
+    getoff();
     super.initState();
     astro_id = 0;
     BlocProvider.of<AstrocubitCubit>(context).update_Name("Select Astrologer");
     checknet();
+  }
+
+  Future<void> getoff() async {
+    var key = await FirebaseFirestore.instance
+        .collection("AppData")
+        .doc("APIKEY")
+        .get();
+    _ofsp = (key.data() as dynamic)["Offer_Price"];
   }
 
   Future<void> set_answerprice() async {
@@ -111,20 +121,170 @@ class _AskQuestionState extends State<AskQuestion> {
               if (_textEditingController.text.replaceAll(" ", "") != "" &&
                   _textEditingController.text != null) {
                 if (astro_id != 0) {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => py_pg(
-                                que: _textEditingController.text,
-                                lat: lat,
-                                lon: lon,
-                                dob: datei,
-                                bt: timei,
-                                type: "Question",
-                                astro_id: astro_id,
-                                name: currentuser.passname(),
-                                pricee: _ansp,
-                              )));
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) {
+                          return Dialog(
+                            backgroundColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            elevation: 16,
+                            child: Container(
+                              height: 400,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: Colors.amberAccent.shade700)),
+                              margin: EdgeInsets.all(10),
+                              child: Column(
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: () {
+                                      print(_ansp);
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => py_pg(
+                                                    que: _textEditingController
+                                                        .text,
+                                                    lat: lat,
+                                                    lon: lon,
+                                                    dob: datei,
+                                                    bt: timei,
+                                                    type: "Question",
+                                                    astro_id: astro_id,
+                                                    name:
+                                                        currentuser.passname(),
+                                                    pricee: _ansp,
+                                                  )));
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color:
+                                                  Colors.amberAccent.shade700),
+                                          color: Colors.white),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Full Explanation",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "Price: $_ansp/-",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "In this your question will be answered in detail with remedies. Astrologer will talk about your dashas, planets and future prespective. Astrologer will provide you best support remedies for your future.",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      print(_ofsp);
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => py_pg(
+                                                    que: _textEditingController
+                                                        .text,
+                                                    lat: lat,
+                                                    lon: lon,
+                                                    dob: datei,
+                                                    bt: timei,
+                                                    type: "Question",
+                                                    astro_id: astro_id,
+                                                    name:
+                                                        currentuser.passname(),
+                                                    pricee: _ofsp,
+                                                  )));
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              color:
+                                                  Colors.amberAccent.shade700),
+                                          color: Colors.white),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Small Explanation",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "Price: $_ofsp/-",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "In this your question will be answered in detail without remedies. Astrologer will talk about your current dasha only. Astrologer will provide you best prediction for your query.",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                  // Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => py_pg(
+                  //               que: _textEditingController.text,
+                  //               lat: lat,
+                  //               lon: lon,
+                  //               dob: datei,
+                  //               bt: timei,
+                  //               type: "Question",
+                  //               astro_id: astro_id,
+                  //               name: currentuser.passname(),
+                  //               pricee: _ansp,
+                  //             )));
                 } else {
                   Fluttertoast.showToast(
                       msg: "Select Your Astrologer!".tr(),

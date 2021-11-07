@@ -13,7 +13,7 @@ import 'startpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-int version = 2;
+int version = 3;
 
 String hemlo = "";
 void main() async {

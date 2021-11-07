@@ -4,11 +4,13 @@ import 'package:mailer/smtp_server.dart';
 // Use the SmtpServer class to configure an SMTP server:
 
 String username = "info@stackx.online";
-final smtpServer = SmtpServer("stackx.online",
-    ignoreBadCertificate: true,
-    username: username,
-    password: "StackX@123",
-    allowInsecure: true);
+// final smtpServer = SmtpServer("stackx.online",
+//     ignoreBadCertificate: true,
+//     username: username,
+//     password: "StackX@123",
+//     allowInsecure: true);
+
+final smtpServer = gmail("stackx1617@gmail.com", "StackX@123");
 
 void mail(email, orderid, type) async {
   // Create our message.

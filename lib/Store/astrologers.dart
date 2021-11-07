@@ -26,62 +26,22 @@ class _AstrologersState extends State<Astrologers> {
 
   Future<void> getastros() async {
     astrologers = [];
-    var key = await FirebaseFirestore.instance.collection("Astrologers").get();
-    for (var i in key.docs) {
-      if (i.data()["Status"] &&
-          i.data()["CAPQ"] < 12 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) ==
-              5.0) {
+    var key = await FirebaseFirestore.instance
+        .collection("Astrologers")
+        .orderBy("Total_Rating")
+        .get();
+    for (var i in key.docs.reversed) {
+      if (i.data()["CAPQ"] < 15 &&
+          i.data()['Status'] &&
+          roundDouble(i.data()["Total_Rating"] / 1, 2) >= 3) {
         astrologers.add(Astrologer_Wid(
             dis: i.data()["Disc"],
             name: i.data()["Name"],
-            rate: i.data()["Total_Rating"] / i.data()["Ratings"],
+            rate: i.data()["Total_Rating"],
             exp: i.data()["Experience"],
             pic: i.data()["Pic"],
             id: i.data()["astro_id"]));
-      } else {}
-    }
-    for (var i in key.docs) {
-      if (i.data()["Status"] &&
-          i.data()["CAPQ"] < 12 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) >= 4 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) < 5) {
-        astrologers.add(Astrologer_Wid(
-            name: i.data()["Name"],
-            dis: i.data()["Disc"],
-            rate: i.data()["Total_Rating"] / i.data()["Ratings"],
-            exp: i.data()["Experience"],
-            pic: i.data()["Pic"],
-            id: i.data()["astro_id"]));
-      } else {}
-    }
-    for (var i in key.docs) {
-      if (i.data()["Status"] &&
-          i.data()["CAPQ"] < 12 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) >= 3 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) < 4) {
-        astrologers.add(Astrologer_Wid(
-            dis: i.data()["Disc"],
-            name: i.data()["Name"],
-            rate: i.data()["Total_Rating"] / i.data()["Ratings"],
-            exp: i.data()["Experience"],
-            pic: i.data()["Pic"],
-            id: i.data()["astro_id"]));
-      } else {}
-    }
-    for (var i in key.docs) {
-      if (i.data()["Status"] &&
-          i.data()["CAPQ"] < 12 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) >= 2 &&
-          roundDouble(i.data()["Total_Rating"] / i.data()["Ratings"], 2) < 3) {
-        astrologers.add(Astrologer_Wid(
-            dis: i.data()["Disc"],
-            name: i.data()["Name"],
-            rate: i.data()["Total_Rating"] / i.data()["Ratings"],
-            exp: i.data()["Experience"],
-            pic: i.data()["Pic"],
-            id: i.data()["astro_id"]));
-      } else {}
+      }
     }
     setState(() {});
   }
@@ -130,8 +90,11 @@ class Astrologer_Wid extends StatelessWidget {
         Navigator.pop(context);
       },
       child: Container(
-        // height: 145,
-        margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+        margin: EdgeInsets.fromLTRB(
+            MediaQuery.of(context).size.height * 0.014,
+            0,
+            MediaQuery.of(context).size.height * 0.014,
+            MediaQuery.of(context).size.height * 0.014),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.amberAccent.shade700)),
@@ -139,34 +102,34 @@ class Astrologer_Wid extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              width: 10,
+              width: MediaQuery.of(context).size.height * 0.013,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 47,
+                  radius: MediaQuery.of(context).size.height * 0.069,
                   backgroundColor: Colors.amberAccent.shade700,
                   child: CircleAvatar(
-                    radius: 46,
+                    radius: MediaQuery.of(context).size.height * 0.066,
                     backgroundImage: NetworkImage(pic),
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.008),
                 Text(
-                  "${roundDouble(rate, 2)}/5",
+                  "${roundDouble(rate / 1, 1)}/5",
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: MediaQuery.of(context).size.height * 0.022,
                       fontWeight: FontWeight.normal,
                       color: Colors.white),
                 ),
               ],
             ),
             SizedBox(
-              width: 15,
+              width: MediaQuery.of(context).size.height * 0.02,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,18 +137,18 @@ class Astrologer_Wid extends StatelessWidget {
                   Text(
                     "$name",
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: MediaQuery.of(context).size.height * 0.025,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  SizedBox(height: 6),
+                  SizedBox(height: 4),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Experience: $exp years",
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: MediaQuery.of(context).size.height * 0.02,
                             fontWeight: FontWeight.normal,
                             color: Colors.white),
                       ),
@@ -193,13 +156,14 @@ class Astrologer_Wid extends StatelessWidget {
                         height: 6,
                       ),
                       Container(
-                        width: 205,
-                        height: 57,
+                        width: MediaQuery.of(context).size.width * 0.58,
+                        height: MediaQuery.of(context).size.height * 0.085,
                         child: SingleChildScrollView(
                           child: Text(
                             dis,
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.016,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),

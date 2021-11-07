@@ -92,12 +92,13 @@ class _Issue_CollectorState extends State<Issue_Collector> {
 Future<void> _mailer(issue) async {
   // ignore: deprecated_member_use
   String username = "info@stackx.online";
-  final smtpServer = SmtpServer("stackx.online",
-      ignoreBadCertificate: true,
-      username: username,
-      password: "StackX@123",
-      allowInsecure: true);
+  // final smtpServer = SmtpServer("stackx.online",
+  //     ignoreBadCertificate: true,
+  //     username: username,
+  //     password: "StackX@123",
+  //     allowInsecure: true);
 
+  final smtpServer = gmail("stackx1617@gmail.com", "StackX@123");
   // Create our message.
   final message = Message()
     ..from = Address(username, 'StackX-AstroDrishti')
