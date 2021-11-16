@@ -314,7 +314,7 @@ class _AskQuestionState extends State<AskQuestion> {
                   Icon(
                     Icons.send,
                     color: Colors.black,
-                    size: MediaQuery.of(context).size.width * 0.065,
+                    size: MediaQuery.of(context).size.width * 0.078,
                   ),
                   SizedBox(height: 3),
                   Text(

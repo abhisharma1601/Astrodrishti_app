@@ -1,11 +1,14 @@
 // @dart=2.9
 import 'dart:ffi';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:astrodrishti_app/update.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'cubit/astrocubit_cubit.dart';
 import 'sidescreens/loading.dart';
@@ -16,10 +19,12 @@ import 'package:easy_localization/easy_localization.dart';
 int version = 3;
 
 String hemlo = "";
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
@@ -39,6 +44,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     checkupdate();
+    FirebaseMessaging.instance.getToken().then((value) => print(value));
     super.initState();
   }
 

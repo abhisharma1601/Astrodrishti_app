@@ -1,5 +1,8 @@
 //This code is of page which is used under any issues button and used for taking any issues from users
+import 'dart:io';
+
 import 'package:astrodrishti_app/startpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -91,14 +94,14 @@ class _Issue_CollectorState extends State<Issue_Collector> {
 
 Future<void> _mailer(issue) async {
   // ignore: deprecated_member_use
-  String username = "info@stackx.online";
-  // final smtpServer = SmtpServer("stackx.online",
-  //     ignoreBadCertificate: true,
-  //     username: username,
-  //     password: "StackX@123",
-  //     allowInsecure: true);
+  String username = "astrodrishti@stackx.online";
+  final smtpServer = SmtpServer("stackx.online",
+      ignoreBadCertificate: true,
+      username: username,
+      password: "StackX@123",
+      allowInsecure: true);
 
-  final smtpServer = gmail("stackx1617@gmail.com", "StackX@123");
+  // final smtpServer = gmail("stackx1617@gmail.com", "StackX@123");
   // Create our message.
   final message = Message()
     ..from = Address(username, 'StackX-AstroDrishti')

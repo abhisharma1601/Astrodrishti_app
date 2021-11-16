@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nice_button/nice_button.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -32,7 +34,7 @@ class _start_pageState extends State<start_page> {
         connectivityResult == ConnectivityResult.wifi) {
       login();
     } else {
-      nonet();
+      Fluttertoast.showToast(msg: "Check your Internet Connection!");
     }
   }
 
@@ -72,6 +74,12 @@ class _start_pageState extends State<start_page> {
         language = false;
       }
 
+      late var fcm_token;
+
+      await FirebaseMessaging.instance
+          .getToken()
+          .then((value) => fcm_token = value);
+
       FirebaseFirestore.instance
           .collection("Users")
           .doc("emails")
@@ -80,7 +88,8 @@ class _start_pageState extends State<start_page> {
           .set({
         "Email": user.email as String,
         "Name": user.displayName as String,
-        "Lan Bool": language
+        "Lan Bool": language,
+        "fcm_token": fcm_token
       }, SetOptions(merge: true));
 
       currentuser = UserData(

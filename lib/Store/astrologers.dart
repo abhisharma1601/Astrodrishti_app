@@ -107,11 +107,14 @@ class Astrologer_Wid extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 6,
+                ),
                 CircleAvatar(
-                  radius: MediaQuery.of(context).size.height * 0.069,
+                  radius: MediaQuery.of(context).size.height * 0.062,
                   backgroundColor: Colors.amberAccent.shade700,
                   child: CircleAvatar(
-                    radius: MediaQuery.of(context).size.height * 0.066,
+                    radius: MediaQuery.of(context).size.height * 0.059,
                     backgroundImage: NetworkImage(pic),
                   ),
                 ),
@@ -123,10 +126,13 @@ class Astrologer_Wid extends StatelessWidget {
                       fontWeight: FontWeight.normal,
                       color: Colors.white),
                 ),
+                SizedBox(
+                  height: 6,
+                ),
               ],
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.height * 0.02,
+              width: MediaQuery.of(context).size.height * 0.017,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 12),
@@ -156,14 +162,14 @@ class Astrologer_Wid extends StatelessWidget {
                         height: 6,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.58,
+                        width: 210,
                         height: MediaQuery.of(context).size.height * 0.085,
                         child: SingleChildScrollView(
                           child: Text(
                             dis,
                             style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.height * 0.016,
+                                    MediaQuery.of(context).size.height * 0.015,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
