@@ -5,6 +5,8 @@ import 'package:astrodrishti_app/Store/report_page.dart';
 import 'package:astrodrishti_app/Store/shop_main.dart';
 import 'package:astrodrishti_app/sidescreens/drawer.dart';
 import 'package:astrodrishti_app/sidescreens/order_query.dart';
+import 'package:astrodrishti_app/sidescreens/report_issue.dart';
+import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -46,22 +48,39 @@ class _page1State extends State<page1> {
 
   void notify() {
     //when app is terminated
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if (message!.notification != null) {
-        if (message.notification!.title == "Order Updated") {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => order_query(
-                      url:
-                          "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
-        }
+    FirebaseMessaging.instance.getInitialMessage().then((message) async {
+      if (message!.notification != null &&
+          message.notification!.title == "Order Updated") {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => order_query(
+                    url:
+                        "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
+      }
+
+      if (message.notification != null &&
+          message.notification!.title == "Consult Astrologer") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AskQuestion()));
+      }
+
+      if (message.notification != null &&
+          message.notification!.title == "Daily Horoscope") {
+        http.Response rest = await http.get(Uri.parse(
+            "http://horoscope-api.herokuapp.com/horoscope/today/Capricorn"));
+        String dat = jsonDecode(rest.body)["date"];
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => dailyhr(
+                      date: dat,
+                    )));
       }
     });
 
     //foreground message
-    FirebaseMessaging.onMessage.listen((message) {
-      print("helo!");
+    FirebaseMessaging.onMessage.listen((message) async {
       if (message.notification != null) {
         print(message.notification!.body);
         Fluttertoast.showToast(msg: message.notification!.body as String);
@@ -69,17 +88,34 @@ class _page1State extends State<page1> {
     });
 
     //background taps
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print(message.notification!.title as String);
-      print(message.notification!.body);
+    FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       if (message.notification!.title == "Order Updated") {
-        print("Hello");
+        print("1123123");
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => order_query(
                     url:
                         "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
+      }
+
+      if (message.notification != null &&
+          message.notification!.title == "Consult Astrologer") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AskQuestion()));
+      }
+
+      if (message.notification != null &&
+          message.notification!.title == "Daily Horoscope") {
+        http.Response rest = await http.get(Uri.parse(
+            "http://horoscope-api.herokuapp.com/horoscope/today/Capricorn"));
+        String dat = jsonDecode(rest.body)["date"];
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => dailyhr(
+                      date: dat,
+                    )));
       }
     });
   }
@@ -144,30 +180,6 @@ class _page1State extends State<page1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: GestureDetector(
-      //   onTap: () {
-      //     Navigator.push(
-      //         context, MaterialPageRoute(builder: (context) => AskQuestion()));
-      //   },
-      //   child: CircleAvatar(
-      //     backgroundColor: Colors.amberAccent[700],
-      //     radius: MediaQuery.of(context).size.width * 0.08,
-      //     child: CircleAvatar(
-      //       radius: MediaQuery.of(context).size.width * 0.075,
-      //       backgroundColor: Colors.white,
-      //       child: Padding(
-      //         padding: const EdgeInsets.all(8.0),
-      //         child: Center(
-      //           child: Icon(
-      //             Icons.chat,
-      //             color: Colors.black,
-      //             size: MediaQuery.of(context).size.width * 0.088,
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
       drawer: Drawer(
         child: drawer(),
       ),
@@ -186,6 +198,44 @@ class _page1State extends State<page1> {
           ),
         ),
         actions: [
+          // Badge(
+          //   badgeContent: Text("2"),
+          //   child: Icon(
+          //       Icons.notifications,
+          //       color: Colors.black,
+          //       size: 28,
+          //     ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Shop(
+                      email: currentuser.passemail(),
+                    ),
+                  ),
+                );
+              },
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Issue_Collector(),
+                    ),
+                  );
+                },
+                child: Icon(
+                  Icons.rate_review,
+                  color: Colors.black,
+                  size: 28,
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: GestureDetector(
@@ -199,10 +249,10 @@ class _page1State extends State<page1> {
               child: Icon(
                 Icons.shopping_cart,
                 color: Colors.black,
-                size: 30,
+                size: 28,
               ),
             ),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(

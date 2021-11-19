@@ -36,7 +36,8 @@ class _py_pgState extends State<py_pg> {
   @override
   void initState() {
     prc = widget.pricee;
-    if (prc == 11) {
+    if (prc == ofsp) {
+      print("hogya $ofsp");
       widget.type = "Offer_Question";
     }
     _razorpay = Razorpay();

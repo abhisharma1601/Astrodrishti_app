@@ -58,6 +58,7 @@ dependencies:
   localstorage: ^4.0.0+1 
   bloc:
   flutter_bloc:
+  badges: ^2.0.1
   
   
 

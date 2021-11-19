@@ -25,7 +25,7 @@ class AskQuestion extends StatefulWidget {
 }
 
 int _ansp = answerprice;
-late int _ofsp = 0;
+late int ofsp = 0;
 int astro_id = 0;
 
 class _AskQuestionState extends State<AskQuestion> {
@@ -44,36 +44,37 @@ class _AskQuestionState extends State<AskQuestion> {
         .collection("AppData")
         .doc("APIKEY")
         .get();
-    _ofsp = (key.data() as dynamic)["Offer_Price"];
+    ofsp = (key.data() as dynamic)["Offer_Price"];
   }
 
-  Future<void> set_answerprice() async {
-    try {
-      var snap = await FirebaseFirestore.instance
-          .collection("Users")
-          .doc("emails")
-          .collection(currentuser.passemail())
-          .doc("Data")
-          .get();
-      if (!(snap.data() as dynamic)["question_1"]) {
-        var key = await FirebaseFirestore.instance
-            .collection("AppData")
-            .doc("APIKEY")
-            .get();
+  // ignore: non_constant_identifier_names
+  // Future<void> set_answerprice() async {
+  //   try {
+  //     var snap = await FirebaseFirestore.instance
+  //         .collection("Users")
+  //         .doc("emails")
+  //         .collection(currentuser.passemail())
+  //         .doc("Data")
+  //         .get();
+  //     if (!(snap.data() as dynamic)["question_1"]) {
+  //       var key = await FirebaseFirestore.instance
+  //           .collection("AppData")
+  //           .doc("APIKEY")
+  //           .get();
 
-        _ansp = (key.data() as dynamic)["Offer_Price"];
-      } else {
-        _ansp = answerprice;
-      }
-    } catch (e) {
-      var key = await FirebaseFirestore.instance
-          .collection("AppData")
-          .doc("APIKEY")
-          .get();
+  //       _ansp = (key.data() as dynamic)["Offer_Price"];
+  //     } else {
+  //       _ansp = answerprice;
+  //     }
+  //   } catch (e) {
+  //     var key = await FirebaseFirestore.instance
+  //         .collection("AppData")
+  //         .doc("APIKEY")
+  //         .get();
 
-      _ansp = (key.data() as dynamic)["Offer_Price"];
-    }
-  }
+  //     _ansp = (key.data() as dynamic)["Offer_Price"];
+  //   }
+  // }
 
   getLocationWithNominatim() async {
     var coors = await picloc(context);
@@ -206,7 +207,7 @@ class _AskQuestionState extends State<AskQuestion> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      print(_ofsp);
+                                      print(ofsp);
                                       Navigator.pop(context);
                                       Navigator.pushReplacement(
                                           context,
@@ -222,7 +223,7 @@ class _AskQuestionState extends State<AskQuestion> {
                                                     astro_id: astro_id,
                                                     name:
                                                         currentuser.passname(),
-                                                    pricee: _ofsp,
+                                                    pricee: ofsp,
                                                   )));
                                     },
                                     child: Container(
@@ -246,7 +247,7 @@ class _AskQuestionState extends State<AskQuestion> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            "Price: $_ofsp/-",
+                                            "Price: $ofsp/-",
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 17,

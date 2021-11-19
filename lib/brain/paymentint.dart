@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-//nothing 
 
+// ignore: camel_case_types
 class finalpage extends StatelessWidget {
   finalpage({required this.head, required this.body, required this.pyt});
   String head, body, pyt;
@@ -22,11 +24,10 @@ class finalpage extends StatelessWidget {
       body: Container(
           margin: EdgeInsets.all(10),
           padding: EdgeInsets.all(10),
-          height: 600,
-          width: 400,
           decoration: BoxDecoration(
               color: Colors.black, borderRadius: BorderRadius.circular(10)),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 2, 10, 20),
@@ -39,7 +40,7 @@ class finalpage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 0, 30),
+                padding: const EdgeInsets.fromLTRB(8, 2, 10, 20),
                 child: Text(
                   body,
                   style: TextStyle(
@@ -48,8 +49,8 @@ class finalpage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 60, 10, 20),
+              SizedBox(height: 20),
+              Center(
                 child: Text(
                   pyt,
                   style: TextStyle(
