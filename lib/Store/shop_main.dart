@@ -6,7 +6,7 @@ import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:astrodrishti_app/screens/dailyhoroscope.dart';
 import 'package:astrodrishti_app/screens/dataentry.dart';
-import 'package:astrodrishti_app/sidescreens/drawer.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/painting.dart';

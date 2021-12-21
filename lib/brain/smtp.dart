@@ -47,7 +47,7 @@ void notify(astro_email, orderid, type, astroid) async {
   final notifyMessage = Message()
     ..from = Address(username, "StackX-AstroDrishti")
     ..recipients.add(astro_email.toString())
-    ..subject = 'You have a new question with id $orderid'
+    ..subject = 'You have a new order with orderid $orderid'
     ..text =
         "Type of order is $type.\nYour astro_id: $astroid.\nTry answering it as soon as possible.\nAll the best.";
 

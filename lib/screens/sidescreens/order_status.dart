@@ -1,5 +1,4 @@
-import 'package:astrodrishti_app/sidescreens/blogs.dart';
-import 'package:astrodrishti_app/sidescreens/order_query.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -86,14 +85,14 @@ class _orderboxState extends State<orderbox> {
   IconData icc = Icons.file_download;
   double prc = 10.00;
 
-  _launchURL() async {
-    var url = '${widget.urll}';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
+  // _launchURL() async {
+  //   var url = '${widget.urll}';
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +151,7 @@ class _orderboxState extends State<orderbox> {
                 Spacer(),
                 GestureDetector(
                   onTap: () async {
-                    _launchURL();
+                    launch(widget.urll);
                   },
                   child: Icon(
                     icc,
@@ -243,15 +242,13 @@ class bottomsheet extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () async {
-                  if (await canLaunch(urle)) {
-                    print("22");
+                  try {
                     launch(urle);
-                  } else {
-                    print(urle);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => order_query(url: urle)));
+                  } catch (e) {
+                    //  Navigator.push(
+                    // //     context,
+                    // //     MaterialPageRoute(
+                    // //         builder: (context) => order_query(url: urle)));
                   }
                 },
                 child: Container(

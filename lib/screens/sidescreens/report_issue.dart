@@ -9,8 +9,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
-import '../main.dart';
-
 class Issue_Collector extends StatefulWidget {
   @override
   _Issue_CollectorState createState() => _Issue_CollectorState();

@@ -1,5 +1,6 @@
 // @dart=2.9
 import 'dart:ffi';
+import 'package:astrodrishti_app/screens/sidescreens/loading.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,12 +12,12 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'cubit/astrocubit_cubit.dart';
-import 'sidescreens/loading.dart';
+
 import 'startpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-int version = 3;
+int version = 4;
 
 String hemlo = "";
 

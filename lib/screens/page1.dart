@@ -3,9 +3,10 @@ import 'dart:convert';
 
 import 'package:astrodrishti_app/Store/report_page.dart';
 import 'package:astrodrishti_app/Store/shop_main.dart';
-import 'package:astrodrishti_app/sidescreens/drawer.dart';
-import 'package:astrodrishti_app/sidescreens/order_query.dart';
-import 'package:astrodrishti_app/sidescreens/report_issue.dart';
+import 'package:astrodrishti_app/screens/sidescreens/drawer.dart';
+import 'package:astrodrishti_app/screens/sidescreens/order_query.dart';
+import 'package:astrodrishti_app/screens/sidescreens/report_issue.dart';
+
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -51,12 +52,16 @@ class _page1State extends State<page1> {
     FirebaseMessaging.instance.getInitialMessage().then((message) async {
       if (message!.notification != null &&
           message.notification!.title == "Order Updated") {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => order_query(
-                    url:
-                        "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
+        if (message.data["Type"] == "Question") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => order_query(
+                      url:
+                          "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
+        } else if (message.data["Type"] == "Report") {
+          launch(message.data["link"]);
+        }
       }
 
       if (message.notification != null &&
@@ -90,13 +95,16 @@ class _page1State extends State<page1> {
     //background taps
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       if (message.notification!.title == "Order Updated") {
-        print("1123123");
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => order_query(
-                    url:
-                        "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
+        if (message.data["Type"] == "Question") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => order_query(
+                      url:
+                          "https://stackx1617.herokuapp.com/orderquery?OID=${message.data["OID"]}")));
+        } else if (message.data["Type"] == "Report") {
+          launch(message.data["link"]);
+        }
       }
 
       if (message.notification != null &&

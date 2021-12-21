@@ -205,12 +205,12 @@ class _report_entryState extends State<report_entry> {
                     await getLocationWithNominatim();
                     http.Response res = await http.get(
                       Uri.parse(
-                          "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=&lon=&format=json"),
+                          "https://us1.locationiq.com/v1/reverse.php?key=4b811c0bc86e19&lat=$lat&lon=$lon&format=json"),
                     );
 
                     http.Response ress = await http.get(
                       Uri.parse(
-                          "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=&lng="),
+                          "http://api.timezonedb.com/v2.1/get-time-zone?key=0MX7YDAS3D26&format=json&by=position&lat=$lat&lng=$lon"),
                     );
                     setState(() {
                       if (jsonDecode(res.body)["address"]["city"] == null) {
@@ -267,7 +267,7 @@ class _report_entryState extends State<report_entry> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(10, 5, 15, 10),
+                    margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.amberAccent.shade700),
@@ -303,7 +303,7 @@ class _report_entryState extends State<report_entry> {
                         MaterialPageRoute(builder: (context) => Astrologers()));
                   },
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(10, 5, 15, 0),
+                    margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.amberAccent.shade700),

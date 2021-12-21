@@ -1,12 +1,13 @@
 import 'package:astrodrishti_app/brain/smtp.dart';
-import 'package:astrodrishti_app/sidescreens/report_issue.dart';
+import 'package:astrodrishti_app/screens/sidescreens/report_issue.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:share/share.dart';
 
-import '../startpage.dart';
+import '../../startpage.dart';
 import 'about.dart';
 import 'order_status.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -146,9 +147,12 @@ class acc_page extends StatelessWidget {
                     child: ac_wid(title: "About App".tr())),
                 GestureDetector(
                     onTap: () {
-                       Navigator.push(context,
-                          MaterialPageRoute(builder: (contxet) => Issue_Collector()));
-                    }, child: ac_wid(title: "Report Issue".tr())),
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (contxet) => Issue_Collector()));
+                    },
+                    child: ac_wid(title: "Report Issue".tr())),
                 GestureDetector(
                     onTap: () {
                       Share.share(
