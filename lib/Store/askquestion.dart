@@ -102,6 +102,7 @@ class _AskQuestionState extends State<AskQuestion> {
   late Map _pickedLocation;
   var _pickedLocationText;
   TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _numbercontroller = TextEditingController();
   //var geocoder = new Geocoder("652b38f6bdc04a62a89816aa15506b60");
   String loca = "Delhi, India";
   String lat = "28.70410001";
@@ -151,8 +152,8 @@ class _AskQuestionState extends State<AskQuestion> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => py_pg(
-                                                    que: _textEditingController
-                                                        .text,
+                                                    que:
+                                                        "${_textEditingController.text}\nFor KP:\nCustomer gave ${_numbercontroller.text} between 0-50.",
                                                     lat: lat,
                                                     lon: lon,
                                                     dob: datei,
@@ -213,8 +214,8 @@ class _AskQuestionState extends State<AskQuestion> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => py_pg(
-                                                    que: _textEditingController
-                                                        .text,
+                                                    que:
+                                                        "${_textEditingController.text} .For K.P., customer gave ${_numbercontroller.text} between 0-50.",
                                                     lat: lat,
                                                     lon: lon,
                                                     dob: datei,
@@ -372,6 +373,30 @@ class _AskQuestionState extends State<AskQuestion> {
                         contentPadding: EdgeInsets.all(16),
                         hintText: "Type You Question Here.....".tr(),
                         hintStyle: TextStyle(color: Colors.black, fontSize: 20),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white,
+                    ),
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      controller: _numbercontroller,
+                      textAlign: TextAlign.left,
+                      keyboardType: TextInputType.number,
+                      maxLines: null,
+                      decoration: new InputDecoration(
+                        contentPadding: EdgeInsets.all(16),
+                        hintText: "Enter any number between 1-50...".tr(),
+                        hintStyle: TextStyle(color: Colors.black, fontSize: 18),
                         border: InputBorder.none,
                       ),
                     ),

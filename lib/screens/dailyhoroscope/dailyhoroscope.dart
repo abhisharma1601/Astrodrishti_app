@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:astrodrishti_app/screens/dailyhoroscope/displayscreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -15,6 +17,7 @@ class _dailyhrState extends State<dailyhr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amberAccent[700],
@@ -30,24 +33,12 @@ class _dailyhrState extends State<dailyhr> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            // Center(
-            //   child: Padding(
-            //     padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-            //     child: Text(
-            //       widget.date,
-            //       style: TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 40,
-            //           fontWeight: FontWeight.bold),
-            //     ),
-            //   ),
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Expanded(
                   child: Horobox(
-                    sign: "Aries",
+                    sign: "1",
                     txt: "Aries".tr(),
                     url:
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Aries.svg/1200px-Aries.svg.png",
@@ -55,7 +46,7 @@ class _dailyhrState extends State<dailyhr> {
                 ),
                 Expanded(
                   child: Horobox(
-                    sign: "Libra",
+                    sign: "7",
                     txt: "Libra".tr(),
                     url:
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Libra.svg/1200px-Libra.svg.png",
@@ -68,14 +59,14 @@ class _dailyhrState extends State<dailyhr> {
               children: <Widget>[
                 Expanded(
                   child: Horobox(
-                      sign: "Virgo",
+                      sign: "6",
                       txt: "Virgo".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Virgo.svg/1200px-Virgo.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
-                      sign: "Sagittarius",
+                      sign: "9",
                       txt: "Sagittarius".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sagittarius.svg/1200px-Sagittarius.svg.png"),
@@ -87,7 +78,7 @@ class _dailyhrState extends State<dailyhr> {
               children: <Widget>[
                 Expanded(
                   child: Horobox(
-                    sign: "Aquarius",
+                    sign: "11",
                     txt: "Aquarius".tr(),
                     url:
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Aquarius.svg/1200px-Aquarius.svg.png",
@@ -95,7 +86,7 @@ class _dailyhrState extends State<dailyhr> {
                 ),
                 Expanded(
                   child: Horobox(
-                      sign: "Pisces",
+                      sign: "12",
                       txt: "Pisces".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pisces.svg/1200px-Pisces.svg.png"),
@@ -107,14 +98,14 @@ class _dailyhrState extends State<dailyhr> {
               children: <Widget>[
                 Expanded(
                   child: Horobox(
-                      sign: "Gemini",
+                      sign: "3",
                       txt: "Gemini".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gemini.svg/1200px-Gemini.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
-                      sign: "Taurus",
+                      sign: "2",
                       txt: "Taurus".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Taurus.svg/1200px-Taurus.svg.png"),
@@ -126,14 +117,14 @@ class _dailyhrState extends State<dailyhr> {
               children: <Widget>[
                 Expanded(
                   child: Horobox(
-                      sign: "Leo",
+                      sign: "5",
                       txt: "Leo".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Leo.svg/1200px-Leo.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
-                      sign: "Scorpio",
+                      sign: "8",
                       txt: "Scorpio".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Scorpio.svg/1200px-Scorpio.svg.png"),
@@ -145,14 +136,14 @@ class _dailyhrState extends State<dailyhr> {
               children: <Widget>[
                 Expanded(
                   child: Horobox(
-                      sign: "Capricorn",
+                      sign: "10",
                       txt: "Capricorn".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Capricorn.svg/1200px-Capricorn.svg.png"),
                 ),
                 Expanded(
                   child: Horobox(
-                      sign: "Cancer",
+                      sign: "4",
                       txt: "Cancer".tr(),
                       url:
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cancer.svg/1200px-Cancer.svg.png"),
@@ -177,57 +168,68 @@ class Horobox extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         http.Response rest = await http.get(Uri.parse(
-            "http://horoscope-api.herokuapp.com/horoscope/today/$sign"));
-        String dat = jsonDecode(rest.body)['horoscope'];
-        showDialog(
-          context: context,
-          builder: (context) {
-            return Dialog(
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              elevation: 16,
-              child: Container(
-                height: 500,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.amberAccent.shade700)),
-                margin: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      sign,
-                      style: TextStyle(
-                          color: Colors.amberAccent.shade700,
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      dat,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-            );
-          },
+            "https://api.vedicastroapi.com/json/prediction/dailysun?zodiac=$sign&show_same=true&date=${"${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"}&type=big&api_key=$keyy"));
+        http.Response rest1 = await http.get(Uri.parse(
+            "https://api.vedicastroapi.com/json/prediction/weeklysun?zodiac=$sign&show_same=true&week=thisweek&type=big&api_key=$keyy"));
+        String dat = jsonDecode(rest.body)["response"]['bot_response'];
+        String datw = jsonDecode(rest1.body)["response"]['bot_response'];
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                HoroscopeDisplay(dailyData: dat, weeklyData: datw, name: txt),
+          ),
         );
+        // showDialog(
+        //   context: context,
+        //   builder: (context) {
+        //     return Dialog(
+        //       backgroundColor: Colors.transparent,
+        //       shape: RoundedRectangleBorder(
+        //           borderRadius: BorderRadius.circular(10)),
+        //       elevation: 16,
+        //       child: Container(
+        //         height: 500,
+        //         padding: EdgeInsets.all(10),
+        //         decoration: BoxDecoration(
+        //             color: Colors.black,
+        //             borderRadius: BorderRadius.circular(10),
+        //             border: Border.all(color: Colors.amberAccent.shade700)),
+        //         margin: EdgeInsets.all(10),
+        //         child: Column(
+        //           children: <Widget>[
+        //             Text(
+        //               txt,
+        //               style: TextStyle(
+        //                   color: Colors.amberAccent.shade700,
+        //                   fontSize: 30,
+        //                   fontWeight: FontWeight.bold),
+        //             ),
+        //             SizedBox(
+        //               height: 15,
+        //             ),
+        //             Text(
+        //               dat,
+        //               textAlign: TextAlign.center,
+        //               style: TextStyle(
+        //                   color: Colors.white,
+        //                   fontSize: 14.5,
+        //                   fontWeight: FontWeight.bold),
+        //             )
+        //           ],
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // );
       },
       child: Container(
         //height: 164,
         margin: EdgeInsets.all(10),
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage("images/gradient_horo.jpg"), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.amberAccent),
         ),
@@ -235,16 +237,17 @@ class Horobox extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Image(height: 90, image: NetworkImage(url)),
+              child: Image(
+                  height: 120, image: AssetImage("images/signs/$txt.png")),
             ),
-            Text(
-              txt,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-              ),
-            ),
+            // Text(
+            //   txt,
+            //   style: TextStyle(
+            //     color: Colors.black,
+            //     fontWeight: FontWeight.bold,
+            //     fontSize: 22,
+            //   ),
+            // ),
           ],
         ),
       ),

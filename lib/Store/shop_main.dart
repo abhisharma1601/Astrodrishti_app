@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:astrodrishti_app/Store/report_page.dart';
 import 'package:astrodrishti_app/Store/askquestion.dart';
 import 'package:astrodrishti_app/brain/wids.dart';
-import 'package:astrodrishti_app/screens/dailyhoroscope.dart';
+import 'package:astrodrishti_app/screens/dailyhoroscope/dailyhoroscope.dart';
 import 'package:astrodrishti_app/screens/dataentry.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';

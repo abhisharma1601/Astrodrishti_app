@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:astrodrishti_app/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:astrodrishti_app/brain/wids.dart';
 import 'package:flutter/material.dart';

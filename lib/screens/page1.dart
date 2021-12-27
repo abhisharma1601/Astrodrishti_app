@@ -23,7 +23,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../startpage.dart';
 import '../Store/askquestion.dart';
-import 'dailyhoroscope.dart';
+import 'dailyhoroscope/dailyhoroscope.dart';
 import 'dataentry.dart';
 import 'manglik.dart';
 import 'moon.dart';
@@ -371,7 +371,7 @@ class _page1State extends State<page1> {
                         ),
                         child: PageBox(
                           name: "consult",
-                          txt1: "Conuslt Now".tr(),
+                          txt1: "Consult Now".tr(),
                           txt2: "Ask the expert for right advice.".tr(),
                         ),
                       ),
