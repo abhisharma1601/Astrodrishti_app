@@ -121,7 +121,9 @@ class _AskQuestionState extends State<AskQuestion> {
           floatingActionButton: GestureDetector(
             onTap: () {
               if (_textEditingController.text.replaceAll(" ", "") != "" &&
-                  _textEditingController.text != null) {
+                  _textEditingController.text != null &&
+                  int.parse(_numbercontroller.text) > 0 &&
+                  int.parse(_numbercontroller.text) < 250) {
                 if (astro_id != 0) {
                   showDialog(
                     context: context,
@@ -153,7 +155,7 @@ class _AskQuestionState extends State<AskQuestion> {
                                           MaterialPageRoute(
                                               builder: (context) => py_pg(
                                                     que:
-                                                        "${_textEditingController.text}\nFor KP:\nCustomer gave ${_numbercontroller.text} between 0-50.",
+                                                        "${_textEditingController.text}\nFor KP:\nCustomer gave ${_numbercontroller.text} between 0-249.",
                                                     lat: lat,
                                                     lon: lon,
                                                     dob: datei,
@@ -273,20 +275,6 @@ class _AskQuestionState extends State<AskQuestion> {
                       );
                     },
                   );
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => py_pg(
-                  //               que: _textEditingController.text,
-                  //               lat: lat,
-                  //               lon: lon,
-                  //               dob: datei,
-                  //               bt: timei,
-                  //               type: "Question",
-                  //               astro_id: astro_id,
-                  //               name: currentuser.passname(),
-                  //               pricee: _ansp,
-                  //             )));
                 } else {
                   Fluttertoast.showToast(
                       msg: "Select Your Astrologer!".tr(),
@@ -395,7 +383,7 @@ class _AskQuestionState extends State<AskQuestion> {
                       maxLines: null,
                       decoration: new InputDecoration(
                         contentPadding: EdgeInsets.all(16),
-                        hintText: "Enter any number between 1-50...".tr(),
+                        hintText: "Enter any number between 1-249...".tr(),
                         hintStyle: TextStyle(color: Colors.black, fontSize: 18),
                         border: InputBorder.none,
                       ),

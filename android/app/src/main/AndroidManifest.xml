@@ -5,8 +5,9 @@
    <application
         android:label="AstroDrishti"
         android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyAHs2rZusPbs1BjngrenWT3NpCqEztRru0"/>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5418173870424245~3400072503"/>         
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

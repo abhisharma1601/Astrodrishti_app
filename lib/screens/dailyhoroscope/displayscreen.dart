@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 // ignore: must_be_immutable
 class HoroscopeDisplay extends StatefulWidget {
   HoroscopeDisplay(
@@ -23,7 +25,14 @@ class _HoroscopeDisplayState extends State<HoroscopeDisplay> {
     _daily_color = Color(0xffD2ccc4).withOpacity(0.8);
     _weekely_color = Color(0xffD2ccc4);
     _dis_text = widget.dailyData;
+    ade.getad();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    ads?.dispose();
+    super.dispose();
   }
 
   @override
@@ -120,19 +129,26 @@ class _HoroscopeDisplayState extends State<HoroscopeDisplay> {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .008,
+                height: MediaQuery.of(context).size.height * .005,
               ),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(18.0),
                 child: Text(
                   _dis_text,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 15),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),

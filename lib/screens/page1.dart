@@ -535,6 +535,9 @@ class _page1State extends State<page1> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 12,
+              )
             ],
           ),
         ),

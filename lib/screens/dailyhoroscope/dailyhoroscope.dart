@@ -1,9 +1,14 @@
 import 'dart:convert';
 import 'package:astrodrishti_app/brain/wids.dart';
+import 'package:astrodrishti_app/cubit/astrocubit_cubit.dart';
 import 'package:astrodrishti_app/screens/dailyhoroscope/displayscreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+bool _this = false;
 
 class dailyhr extends StatefulWidget {
   dailyhr({required this.date});
@@ -16,161 +21,164 @@ class dailyhr extends StatefulWidget {
 class _dailyhrState extends State<dailyhr> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.amberAccent[700],
-        title: Text(
-          "Daily Horoscope".tr(),
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 28,
+    return BlocBuilder<AstrocubitCubit, AstrocubitState>(
+      builder: (context, state) {
+        return ModalProgressHUD(
+          inAsyncCall: BlocProvider.of<AstrocubitCubit>(context).state.progress,
+          opacity: 0,
+          progressIndicator:
+              CircularProgressIndicator(color: Colors.amberAccent.shade700),
+          child: Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              iconTheme: IconThemeData(color: Colors.black),
+              backgroundColor: Colors.amberAccent[700],
+              title: Text(
+                "Daily Horoscope".tr(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                ),
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Horobox(
+                          sign: "1",
+                          txt: "Aries".tr(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Horobox(
+                          sign: "7",
+                          txt: "Libra".tr(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Horobox(
+                          sign: "6",
+                          txt: "Virgo".tr(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Horobox(
+                          sign: "9",
+                          txt: "Sagittarius".tr(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Horobox(
+                          sign: "11",
+                          txt: "Aquarius".tr(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Horobox(
+                          sign: "12",
+                          txt: "Pisces".tr(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Horobox(
+                          sign: "3",
+                          txt: "Gemini".tr(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Horobox(
+                          sign: "2",
+                          txt: "Taurus".tr(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Horobox(
+                          sign: "5",
+                          txt: "Leo".tr(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Horobox(
+                          sign: "8",
+                          txt: "Scorpio".tr(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Horobox(
+                          sign: "10",
+                          txt: "Capricorn".tr(),
+                        ),
+                      ),
+                      Expanded(
+                        child: Horobox(
+                          sign: "4",
+                          txt: "Cancer".tr(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Horobox(
-                    sign: "1",
-                    txt: "Aries".tr(),
-                    url:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Aries.svg/1200px-Aries.svg.png",
-                  ),
-                ),
-                Expanded(
-                  child: Horobox(
-                    sign: "7",
-                    txt: "Libra".tr(),
-                    url:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Libra.svg/1200px-Libra.svg.png",
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Horobox(
-                      sign: "6",
-                      txt: "Virgo".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Virgo.svg/1200px-Virgo.svg.png"),
-                ),
-                Expanded(
-                  child: Horobox(
-                      sign: "9",
-                      txt: "Sagittarius".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sagittarius.svg/1200px-Sagittarius.svg.png"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Horobox(
-                    sign: "11",
-                    txt: "Aquarius".tr(),
-                    url:
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Aquarius.svg/1200px-Aquarius.svg.png",
-                  ),
-                ),
-                Expanded(
-                  child: Horobox(
-                      sign: "12",
-                      txt: "Pisces".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pisces.svg/1200px-Pisces.svg.png"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Horobox(
-                      sign: "3",
-                      txt: "Gemini".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gemini.svg/1200px-Gemini.svg.png"),
-                ),
-                Expanded(
-                  child: Horobox(
-                      sign: "2",
-                      txt: "Taurus".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Taurus.svg/1200px-Taurus.svg.png"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Horobox(
-                      sign: "5",
-                      txt: "Leo".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Leo.svg/1200px-Leo.svg.png"),
-                ),
-                Expanded(
-                  child: Horobox(
-                      sign: "8",
-                      txt: "Scorpio".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Scorpio.svg/1200px-Scorpio.svg.png"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Expanded(
-                  child: Horobox(
-                      sign: "10",
-                      txt: "Capricorn".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Capricorn.svg/1200px-Capricorn.svg.png"),
-                ),
-                Expanded(
-                  child: Horobox(
-                      sign: "4",
-                      txt: "Cancer".tr(),
-                      url:
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cancer.svg/1200px-Cancer.svg.png"),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
 class Horobox extends StatelessWidget {
-  Horobox({required this.sign, required this.txt, required this.url});
+  Horobox({required this.sign, required this.txt});
   String sign;
   String txt;
-  String url;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        BlocProvider.of<AstrocubitCubit>(context).set_progress(true);
+        String day = await DateTime.now().day.toString().length == 1
+            ? "0${DateTime.now().day.toString()}"
+            : DateTime.now().day.toString();
+        String month = await DateTime.now().month.toString().length == 1
+            ? "0${DateTime.now().month.toString()}"
+            : DateTime.now().month.toString();
+        print("$day/$month/${DateTime.now().year}");
         http.Response rest = await http.get(Uri.parse(
-            "https://api.vedicastroapi.com/json/prediction/dailysun?zodiac=$sign&show_same=true&date=${"${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"}&type=big&api_key=$keyy"));
+            "https://api.vedicastroapi.com/json/prediction/dailysun?zodiac=$sign&show_same=true&date=${"$day/$month/${DateTime.now().year}"}&type=big&api_key=$keyy"));
         http.Response rest1 = await http.get(Uri.parse(
             "https://api.vedicastroapi.com/json/prediction/weeklysun?zodiac=$sign&show_same=true&week=thisweek&type=big&api_key=$keyy"));
+
         String dat = jsonDecode(rest.body)["response"]['bot_response'];
         String datw = jsonDecode(rest1.body)["response"]['bot_response'];
         Navigator.push(
@@ -180,6 +188,7 @@ class Horobox extends StatelessWidget {
                 HoroscopeDisplay(dailyData: dat, weeklyData: datw, name: txt),
           ),
         );
+        BlocProvider.of<AstrocubitCubit>(context).set_progress(false);
         // showDialog(
         //   context: context,
         //   builder: (context) {

@@ -1,5 +1,6 @@
 // @dart=2.9
 import 'dart:ffi';
+import 'package:astrodrishti_app/brain/ads.dart';
 import 'package:astrodrishti_app/screens/sidescreens/loading.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,14 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'cubit/astrocubit_cubit.dart';
 
 import 'startpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-int version = 4;
+int version = 6;
 
+BannerAd ads;
+CreateAd ade = CreateAd();
 // String hemlo = "";
 
 void main() async {
