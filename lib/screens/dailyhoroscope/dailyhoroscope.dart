@@ -189,48 +189,6 @@ class Horobox extends StatelessWidget {
           ),
         );
         BlocProvider.of<AstrocubitCubit>(context).set_progress(false);
-        // showDialog(
-        //   context: context,
-        //   builder: (context) {
-        //     return Dialog(
-        //       backgroundColor: Colors.transparent,
-        //       shape: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(10)),
-        //       elevation: 16,
-        //       child: Container(
-        //         height: 500,
-        //         padding: EdgeInsets.all(10),
-        //         decoration: BoxDecoration(
-        //             color: Colors.black,
-        //             borderRadius: BorderRadius.circular(10),
-        //             border: Border.all(color: Colors.amberAccent.shade700)),
-        //         margin: EdgeInsets.all(10),
-        //         child: Column(
-        //           children: <Widget>[
-        //             Text(
-        //               txt,
-        //               style: TextStyle(
-        //                   color: Colors.amberAccent.shade700,
-        //                   fontSize: 30,
-        //                   fontWeight: FontWeight.bold),
-        //             ),
-        //             SizedBox(
-        //               height: 15,
-        //             ),
-        //             Text(
-        //               dat,
-        //               textAlign: TextAlign.center,
-        //               style: TextStyle(
-        //                   color: Colors.white,
-        //                   fontSize: 14.5,
-        //                   fontWeight: FontWeight.bold),
-        //             )
-        //           ],
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // );
       },
       child: Container(
         //height: 164,
